@@ -1,6 +1,12 @@
 import Header from "../components/Header/Header";
+import RecentVacancies from "../components/RecentVacancies/RecentVacancies";
 import StatCard from "../components/StatCard/StatCard";
-import { DashboardStyled, StatsGrid } from "./DashboardPage.styled";
+import UpcomingVacancies from "../components/UpcomingInterviews/UpcomingInterviews";
+import {
+  ContentGrid,
+  DashboardStyled,
+  StatsGrid,
+} from "./DashboardPage.styled";
 
 export default function DashboardPage() {
   const stats = [
@@ -26,6 +32,10 @@ export default function DashboardPage() {
             ></StatCard>
           ))}
         </StatsGrid>
+        <ContentGrid>
+          <RecentVacancies />
+          <UpcomingVacancies />
+        </ContentGrid>
       </DashboardStyled>
     </>
   );

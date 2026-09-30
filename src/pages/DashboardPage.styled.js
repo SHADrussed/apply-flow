@@ -13,3 +13,11 @@ export const StatsGrid = styled.div`
   margin-top: ${theme.spacing.md};
   gap: ${theme.spacing.md};
 `;
+
+export const ContentGrid = styled.div`
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 2fr 1fr;
+  margin-top: ${theme.spacing.md};
+  gap: ${theme.spacing.md};
+`;
