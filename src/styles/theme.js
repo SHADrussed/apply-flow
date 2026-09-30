@@ -22,4 +22,12 @@ export const theme = {
     lg: "24px",
     xl: "32px",
   },
+
+  size: {
+    xs: "8px",
+    sm: "16px",
+    md: "24px",
+    lg: "32px",
+    xl: "48px",
+  },
 };
