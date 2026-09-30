@@ -1,5 +1,10 @@
-import { Link, NavLink } from "react-router-dom";
-import { LogoBlock, NavigaionBlock, SidebarBlock } from "./Sidebar.styled";
+import {
+  LogoBlock,
+  NavigationBlock,
+  NavigationLink,
+  SidebarBlock,
+} from "./Sidebar.styled";
+import { LayoutDashboard, BriefcaseBusiness } from "lucide-react";
 
 export default function Sidebar() {
   return (
@@ -9,14 +14,17 @@ export default function Sidebar() {
         <LogoBlock>
           <h2>ApplyFlow</h2>
         </LogoBlock>
-        <NavigaionBlock>
-          <Link accent>
-            <NavLink to={"/"}>Dashboard</NavLink>
-          </Link>
-          <Link accent>
-            <NavLink to={"vacancies"}>Vacancies</NavLink>
-          </Link>
-        </NavigaionBlock>
+        <NavigationBlock>
+          <NavigationLink to={"/"}>
+            <LayoutDashboard size={18} />
+            <span>Dashboard</span>
+          </NavigationLink>
+
+          <NavigationLink to={"vacancies"}>
+            <BriefcaseBusiness size={18} />
+            <span>Vacancies</span>
+          </NavigationLink>
+        </NavigationBlock>
       </SidebarBlock>
     </>
   );
