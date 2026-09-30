@@ -2,12 +2,6 @@ import styled from "styled-components";
 import { theme } from "../../styles/theme";
 import { NavLink } from "react-router-dom";
 
-export const IconBlock = styled.img`
-  display: flex;
-  flex-wrap: wrap;
-  height: 25px;
-`;
-
 export const SidebarBlock = styled.div`
   width: 240px;
   min-height: 100vh;
@@ -25,8 +19,19 @@ export const NavigationBlock = styled.div`
   gap: ${theme.spacing.xs};
 `;
 export const NavigationLink = styled(NavLink)`
-  background-color: ${theme.colors.background};
+  display: flex;
+  align-items: center;
+  gap: ${theme.spacing.sm};
+
+  padding: ${theme.spacing.sm} ${theme.spacing.md};
+  border-radius: ${theme.radius.md};
+
+  color: ${theme.colors.textMuted};
   &:hover {
+    background-color: ${theme.colors.surfaceHover};
+    color: ${theme.colors.text};
+  }
+  &.active {
     background-color: ${theme.colors.surfaceHover};
     color: ${theme.colors.accent};
   }
