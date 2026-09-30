@@ -16,15 +16,18 @@ export default function UpcomingInterviews() {
         <UpcomingTitle>Upcoming interviews</UpcomingTitle>
       </UpcomingUpper>
       <UpcomingList>
-        {vacancies.map((vacancy) => (
-          <UpcomingVacancy key={vacancy.id}>
-            <VacancyText>{vacancy.date}</VacancyText>
-            <VacancyText>{vacancy.time}</VacancyText>
+        {vacancies.map(
+          (vacancy) =>
+            vacancy.status === "Interview" && (
+              <UpcomingVacancy key={vacancy.id}>
+                <VacancyText>{vacancy.date}</VacancyText>
+                <VacancyText>{vacancy.time}</VacancyText>
 
-            <VacancyImportant>{vacancy.company}</VacancyImportant>
-            <VacancyImportant>{vacancy.position}</VacancyImportant>
-          </UpcomingVacancy>
-        ))}
+                <VacancyImportant>{vacancy.company}</VacancyImportant>
+                <VacancyImportant>{vacancy.position}</VacancyImportant>
+              </UpcomingVacancy>
+            ),
+        )}
       </UpcomingList>
     </UpcomingStyled>
   );
