@@ -27,7 +27,7 @@ ul li {
   list-style: none;
 }
 
-@keyframes card-animation {
+@keyframes animation {
   0% {
     height: 0;
     opacity: 0;
@@ -44,5 +44,4 @@ body {
   font-family: "Roboto", Arial, Helvetica, sans-serif;
   color: #000000;
 }
-
 `;

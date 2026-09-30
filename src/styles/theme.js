@@ -1,30 +1,33 @@
-import styled from "styled-components";
+export const theme = {
+  colors: {
+    background: "#0B0D10",
+    surface: "#11151A",
+    surfaceHover: "#171C22",
+    border: "#232A31",
+    text: "#F5F7FA",
+    textMuted: "#8B96A5",
+    accent: "#7C6CFF",
+  },
 
-export const Wrapper = styled.div`
-  max-width: 100%;
-  width: 100vw;
-  min-height: 100vh;
-  overflow: hidden;
-`;
-export const Container = styled.div`
-  max-width: 1260px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 30px;
+  radius: {
+    sm: "6px",
+    md: "10px",
+    lg: "14px",
+  },
 
-  @media screen and (max-width: 495px) {
-    padding: 0 16px;
-  }
-`;
-export const Button = styled.button`
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-`;
+  spacing: {
+    xs: "4px",
+    sm: "8px",
+    md: "16px",
+    lg: "24px",
+    xl: "32px",
+  },
 
-export const ErrorMessage = styled.p`
-  color: darkred;
-  padding-top: 12px;
-  padding-bottom: 12px;
-`;
+  fontSize: {
+    xs: "8px",
+    sm: "16px",
+    md: "24px",
+    lg: "32px",
+    xl: "48px",
+  },
+};

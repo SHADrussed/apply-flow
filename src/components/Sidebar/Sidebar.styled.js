@@ -1,18 +1,39 @@
 import styled from "styled-components";
-
-export const IconBlock = styled.img`
-  display: flex;
-  flex-wrap: wrap;
-  height: 25px;
-`;
+import { theme } from "../../styles/theme";
+import { NavLink } from "react-router-dom";
 
 export const SidebarBlock = styled.div`
-  height: 70px;
+  width: 240px;
+  min-height: 100vh;
+  background-color: ${theme.colors.surface};
+  border-right: 1px solid ${theme.colors.border};
+  padding: ${theme.spacing.lg};
+  color: ${theme.colors.text};
+`;
+export const LogoBlock = styled.div`
+  padding-bottom: ${theme.spacing.lg};
+`;
+
+export const NavigationBlock = styled.div`
   display: flex;
-  flex-wrap: nowrap;
-  align-items: flex-start;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 10px 10px;
-  max-width: 200px;
+  gap: ${theme.spacing.xs};
+`;
+export const NavigationLink = styled(NavLink)`
+  display: flex;
+  align-items: center;
+  gap: ${theme.spacing.sm};
+
+  padding: ${theme.spacing.sm} ${theme.spacing.md};
+  border-radius: ${theme.radius.md};
+
+  color: ${theme.colors.textMuted};
+  &:hover {
+    background-color: ${theme.colors.surfaceHover};
+    color: ${theme.colors.text};
+  }
+  &.active {
+    background-color: ${theme.colors.surfaceHover};
+    color: ${theme.colors.accent};
+  }
 `;
