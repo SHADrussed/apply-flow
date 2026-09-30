@@ -7,19 +7,21 @@ export const StatCardStyled = styled.div`
   border-radius: ${theme.radius.lg};
   padding: ${theme.spacing.lg};
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  flex-direction: column;
   &:hover {
     background-color: ${theme.colors.surfaceHover};
   }
+  gap: ${theme.spacing.sm};
 `;
 export const Title = styled.div`
   color: ${theme.colors.textMuted};
 `;
 export const Value = styled.div`
   color: ${theme.colors.textMuted};
-  font-size: ${theme.size.lg};
+  font-size: ${theme.fontSize.lg};
 `;
 export const ChangeIndicator = styled.div`
   color: ${theme.colors.textMuted};
-  font-size: ${theme.size.sm};
+  font-size: ${theme.fontSize.sm};
 `;

@@ -8,9 +8,9 @@ import {
 export default function StatCard({ title, value, change }) {
   return (
     <StatCardStyled>
-      <Title>{title} - s</Title>
+      <Title>{title}</Title>
       <Value>{value}</Value>
-      <ChangeIndicator>change: {change}</ChangeIndicator>
+      <ChangeIndicator>{change}</ChangeIndicator>
     </StatCardStyled>
   );
 }

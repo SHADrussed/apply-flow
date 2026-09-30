@@ -7,12 +7,13 @@ export const StyledHeader = styled.header`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  flex-direction: column;
   gap: ${theme.spacing.md};
-  height: 80px;
+  min-height: 110px;
 `;
 export const TitleText = styled.h2`
   color: ${theme.colors.text};
 `;
 export const HeaderDescription = styled.p`
-  color: ${theme.colors.text};
+  color: ${theme.colors.textMuted};
 `;

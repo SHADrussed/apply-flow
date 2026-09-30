@@ -1,13 +1,10 @@
 import { HeaderDescription, StyledHeader, TitleText } from "./Header.styled";
 
-export default function Header({ page }) {
-  if (page === "Dashboard") {
-    return (
-      <StyledHeader>
-        <TitleText>Dashboard</TitleText>
-        <HeaderDescription>Track your job search progress</HeaderDescription>
-      </StyledHeader>
-    );
-  }
-  return;
+export default function Header({ title, description }) {
+  return (
+    <StyledHeader>
+      <TitleText>{title}</TitleText>
+      <HeaderDescription>{description}</HeaderDescription>
+    </StyledHeader>
+  );
 }

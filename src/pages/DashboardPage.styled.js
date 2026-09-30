@@ -7,8 +7,7 @@ export const DashboardStyled = styled.div`
 `;
 
 export const StatsGrid = styled.div`
-  display: flex;
-`;
-export const StatsGridElement = styled.span`
-  color: ${theme.colors.text};
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: ${theme.spacing.md};
 `;
