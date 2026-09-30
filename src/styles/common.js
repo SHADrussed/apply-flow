@@ -29,8 +29,10 @@ export const ErrorMessage = styled.p`
   padding-bottom: 12px;
 `;
 export const AppShell = styled.div`
-  display: block;
+  display: flex;
+  min-height: 100vh;
 `;
-export const MainContent = styled.div`
-  display: block;
+export const MainContent = styled.main`
+  flex: 1;
+  min-width: 0;
 `;
