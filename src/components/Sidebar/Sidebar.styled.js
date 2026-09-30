@@ -8,9 +8,10 @@ export const SidebarBlock = styled.div`
   background-color: ${theme.colors.surface};
   border-right: 1px solid ${theme.colors.border};
   padding: ${theme.spacing.lg};
+  color: ${theme.colors.text};
 `;
 export const LogoBlock = styled.div`
-  padding: ${theme.spacing.sm};
+  padding-bottom: ${theme.spacing.lg};
 `;
 
 export const NavigationBlock = styled.div`

@@ -19,6 +19,7 @@ export default function DashboardPage() {
         <StatsGrid>
           {stats.map((stat) => (
             <StatCard
+              key={stat.title}
               title={stat.title}
               value={stat.value}
               change={stat.change}

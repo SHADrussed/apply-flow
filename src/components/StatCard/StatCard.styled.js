@@ -18,7 +18,7 @@ export const Title = styled.div`
   color: ${theme.colors.textMuted};
 `;
 export const Value = styled.div`
-  color: ${theme.colors.textMuted};
+  color: ${theme.colors.text};
   font-size: ${theme.fontSize.lg};
 `;
 export const ChangeIndicator = styled.div`

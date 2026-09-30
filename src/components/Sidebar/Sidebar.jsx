@@ -10,7 +10,6 @@ export default function Sidebar() {
   return (
     <>
       <SidebarBlock>
-        {/* Сделать логотип */}
         <LogoBlock>
           <h2>ApplyFlow</h2>
         </LogoBlock>
