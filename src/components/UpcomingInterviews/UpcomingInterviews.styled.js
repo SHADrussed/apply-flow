@@ -17,9 +17,10 @@ export const UpcomingTitle = styled.span`
   color: ${theme.colors.text};
   padding: ${theme.spacing.xs};
 `;
-export const UpcomingVacancies = styled.div`
+export const UpcomingList = styled.div`
   display: flex;
   gap: ${theme.spacing.md};
+  flex-direction: column;
 `;
 export const UpcomingVacancy = styled.div`
   color: ${theme.colors.textMuted};

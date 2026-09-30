@@ -3,20 +3,21 @@ import {
   UpcomingStyled,
   UpcomingTitle,
   UpcomingUpper,
+  UpcomingList,
   UpcomingVacancy,
   VacancyImportant,
   VacancyText,
 } from "./UpcomingInterviews.styled";
 
-export default function UpcomingVacancies() {
+export default function UpcomingInterviews() {
   return (
     <UpcomingStyled>
       <UpcomingUpper>
         <UpcomingTitle>Upcoming interviews</UpcomingTitle>
       </UpcomingUpper>
-      <UpcomingVacancies>
+      <UpcomingList>
         {vacancies.map((vacancy) => (
-          <UpcomingVacancy>
+          <UpcomingVacancy key={vacancy.id}>
             <VacancyText>{vacancy.date}</VacancyText>
             <VacancyText>{vacancy.time}</VacancyText>
 
@@ -24,7 +25,7 @@ export default function UpcomingVacancies() {
             <VacancyImportant>{vacancy.position}</VacancyImportant>
           </UpcomingVacancy>
         ))}
-      </UpcomingVacancies>
+      </UpcomingList>
     </UpcomingStyled>
   );
 }

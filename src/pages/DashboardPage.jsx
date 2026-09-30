@@ -1,7 +1,7 @@
 import Header from "../components/Header/Header";
 import RecentVacancies from "../components/RecentVacancies/RecentVacancies";
 import StatCard from "../components/StatCard/StatCard";
-import UpcomingVacancies from "../components/UpcomingInterviews/UpcomingInterviews";
+import UpcomingInterviews from "../components/UpcomingInterviews/UpcomingInterviews";
 import {
   ContentGrid,
   DashboardStyled,
@@ -34,7 +34,7 @@ export default function DashboardPage() {
         </StatsGrid>
         <ContentGrid>
           <RecentVacancies />
-          <UpcomingVacancies />
+          <UpcomingInterviews />
         </ContentGrid>
       </DashboardStyled>
     </>

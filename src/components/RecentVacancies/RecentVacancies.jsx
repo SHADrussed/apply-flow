@@ -20,7 +20,7 @@ export default function RecentVacancies() {
       </RecentUpper>
       <VacanciesList>
         {vacancies.map((vacancy) => (
-          <RecentVacancy>
+          <RecentVacancy key={vacancy.id}>
             <VacancyCompany>{vacancy.company}</VacancyCompany>
             <VacancyMoreInfo>
               <VacancyLowerText>{vacancy.position}</VacancyLowerText>
