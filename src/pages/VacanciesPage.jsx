@@ -1,3 +1,27 @@
+import { Plus } from "lucide-react";
+import Header from "../components/Header/Header";
+import { AddButton, Page, SearchInput, Toolbar } from "./VacanciesPage.styled";
+import { useState } from "react";
+
 export default function VacanciesPage() {
-  return <>VacanciesPage</>;
+  const [search, setSearch] = useState("");
+  return (
+    <Page>
+      <Header
+        title="Vacancies"
+        description="Track and manage your applications"
+      />
+      <Toolbar>
+        <SearchInput
+          value={search}
+          onChange={(event) => setSearch(event.target.value)}
+          placeholder="Search vacancies..."
+        ></SearchInput>
+        <AddButton>
+          <Plus size={18} />
+          Add vacancy
+        </AddButton>
+      </Toolbar>
+    </Page>
+  );
 }
