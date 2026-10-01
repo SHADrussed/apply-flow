@@ -10,22 +10,49 @@ export const Page = styled.div`
 
 export const Toolbar = styled.div`
   display: flex;
-  max-width: 450px;
-  justify-content: space-between;
+  align-items: center;
+  gap: ${theme.spacing.md};
   margin-top: ${theme.spacing.md};
 `;
+export const SearchBlock = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${theme.spacing.sm};
 
-export const SearchInput = styled(Search)`
+  flex: 1;
+
   background-color: ${theme.colors.surface};
   border: 1px solid ${theme.colors.border};
   border-radius: ${theme.radius.sm};
-  padding: ${theme.spacing.md};
-  color: ${theme.colors.text};
-  min-width: 200px;
-  &::placeholder {
-    color: ${theme.colors.text};
+  padding: 0 ${theme.spacing.md};
+
+  &:focus-within {
+    border-color: ${theme.colors.accent};
   }
 `;
+
+export const SearchIcon = styled(Search)`
+  flex-shrink: 0;
+  color: ${theme.colors.textMuted};
+`;
+
+export const SearchInput = styled.input`
+  flex: 1;
+  min-width: 0;
+
+  padding: ${theme.spacing.md} 0;
+
+  background: transparent;
+  border: none;
+  outline: none;
+
+  color: ${theme.colors.text};
+
+  &::placeholder {
+    color: ${theme.colors.textMuted};
+  }
+`;
+
 export const AddButton = styled.button`
   display: flex;
   align-items: center;
