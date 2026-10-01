@@ -45,3 +45,4 @@ export const vacancies = [
     time: "11:45",
   },
 ];
+export const statuses = ["Saved", "Applied", "Interview", "Offer", "Rejected"];

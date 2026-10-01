@@ -7,6 +7,7 @@ export const theme = {
     text: "#F5F7FA",
     textMuted: "#8B96A5",
     accent: "#7C6CFF",
+    accentHover: "#553eff",
   },
 
   radius: {

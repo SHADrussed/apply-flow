@@ -9,6 +9,8 @@ import {
   Toolbar,
 } from "./VacanciesPage.styled";
 import { useState } from "react";
+import KanbanBoard from "../components/KanbanBoard/KanbanBoard";
+import { statuses, vacancies } from "../data/vacancies";
 
 export default function VacanciesPage() {
   const [search, setSearch] = useState("");
@@ -32,6 +34,7 @@ export default function VacanciesPage() {
           Add vacancy
         </AddButton>
       </Toolbar>
+      <KanbanBoard vacancies={vacancies} statuses={statuses} />
     </Page>
   );
 }
