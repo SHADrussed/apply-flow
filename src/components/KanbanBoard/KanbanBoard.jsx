@@ -2,10 +2,17 @@ import KanbanColumn from "../KanbanColumn/KanbanColumn";
 import { KanbanStyled } from "./KanbanBoard.styled";
 
 export default function KanbanBoard({ vacancies, statuses }) {
-  const statusesVacancies = statuses.map((status) => ({
-    status,
-    columnVacancies: vacancies.filter((vacancy) => vacancy.status === status),
-  }));
+  const statusesVacancies = statuses.map((status) => {
+    const columnVacancies = vacancies.filter(
+      (vacancy) => vacancy.status === status,
+    );
+
+    return {
+      status,
+      columnVacancies,
+    };
+  });
+
   return (
     <KanbanStyled>
       {statusesVacancies.map((column) => (
