@@ -37,7 +37,7 @@ export default function VacanciesPage() {
             placeholder="Search vacancies..."
           />
         </SearchBlock>
-        <AddButton>
+        <AddButton to="/vacancies/new">
           <Plus size={18} />
           Add vacancy
         </AddButton>

@@ -3,6 +3,7 @@ import VacanciesPage from "../pages/VacanciesPage";
 import AppLayout from "../layout/AppLayout";
 import VacancyDetailsPage from "../pages/VacancyDetailsPage";
 import DashboardPage from "../pages/DashboardPage";
+import CreateVacancyPage from "../pages/CreateVacancyPage";
 
 function AppRoutes() {
   return (
@@ -13,6 +14,7 @@ function AppRoutes() {
             <Route index element={<DashboardPage />} />
             <Route path="vacancies" element={<VacanciesPage />} />
             <Route path="vacancies/:id" element={<VacancyDetailsPage />} />
+            <Route path="vacancies/new" element={<CreateVacancyPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

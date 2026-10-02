@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { theme } from "../styles/theme";
 import { Search } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const Page = styled.div`
   background-color: ${theme.colors.background};
@@ -53,7 +54,7 @@ export const SearchInput = styled.input`
   }
 `;
 
-export const AddButton = styled.button`
+export const AddButton = styled(Link)`
   display: flex;
   align-items: center;
   gap: ${theme.spacing.xs};
