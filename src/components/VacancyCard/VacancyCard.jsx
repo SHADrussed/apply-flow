@@ -1,6 +1,7 @@
-import { Text, TextMuted } from "../../styles/common";
 import {
   CardHeader,
+  Text,
+  TextMuted,
   Card,
   CompanyBadge,
   CompanyDescription,

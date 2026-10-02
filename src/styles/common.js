@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { theme } from "./theme";
 
 export const Wrapper = styled.div`
   max-width: 100%;
@@ -36,12 +35,4 @@ export const AppShell = styled.div`
 export const MainContent = styled.main`
   flex: 1;
   min-width: 0;
-`;
-export const Text = styled.span`
-  color: ${theme.colors.text};
-  margin-bottom: ${theme.spacing.sm};
-`;
-
-export const TextMuted = styled.span`
-  color: ${theme.colors.textMuted};
 `;
