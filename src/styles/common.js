@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { theme } from "./theme";
+import { Link } from "react-router-dom";
 
 export const Wrapper = styled.div`
   max-width: 100%;
@@ -50,4 +51,23 @@ export const CompanyBadge = styled.div`
   border-radius: ${theme.radius.sm};
   color: ${theme.colors.text};
   font-weight: 600;
+`;
+
+export const BackLink = styled(Link)`
+  color: ${theme.colors.accent};
+  background-color: ${theme.colors.surface};
+  border: 1px solid ${theme.colors.border};
+  border-radius: ${theme.radius.md};
+  width: fit-content;
+  /* Как правильно задать ширину? */
+  padding: ${theme.spacing.md};
+  gap: ${theme.spacing.sm};
+  margin-bottom: ${theme.spacing.lg};
+
+  display: flex;
+  align-items: center;
+  &:hover {
+    color: ${theme.colors.accentHover};
+    background-color: ${theme.colors.surfaceHover};
+  }
 `;

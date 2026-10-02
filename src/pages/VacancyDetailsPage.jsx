@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import {
-  BackLink,
   CompanyInfo,
   CompanyName,
   DetailItem,
@@ -17,7 +16,7 @@ import {
 } from "./VacancyDetailsPage.styled";
 import { vacancies } from "../data/vacancies";
 import { ArrowLeft } from "lucide-react";
-import { CompanyBadge } from "../styles/common";
+import { BackLink, CompanyBadge } from "../styles/common";
 
 export default function VacancyDetailsPage() {
   const { id } = useParams();

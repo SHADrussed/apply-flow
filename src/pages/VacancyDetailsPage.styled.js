@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { theme } from "../styles/theme";
-import { Link } from "react-router-dom";
 
 export const Page = styled.div`
   background-color: ${theme.colors.background};
@@ -10,24 +9,6 @@ export const Page = styled.div`
   color: ${theme.colors.text};
 `;
 export const Text = styled.span``;
-export const BackLink = styled(Link)`
-  color: ${theme.colors.accent};
-  background-color: ${theme.colors.surface};
-  border: 1px solid ${theme.colors.border};
-  border-radius: ${theme.radius.md};
-  width: fit-content;
-  /* Как правильно задать ширину? */
-  padding: ${theme.spacing.md};
-  gap: ${theme.spacing.sm};
-  margin-bottom: ${theme.spacing.lg};
-
-  display: flex;
-  align-items: center;
-  &:hover {
-    color: ${theme.colors.accentHover};
-    background-color: ${theme.colors.surfaceHover};
-  }
-`;
 export const DetailsCard = styled.div`
   width: 100%;
   max-width: 760px;

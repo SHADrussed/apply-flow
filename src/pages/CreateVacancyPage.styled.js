@@ -7,12 +7,65 @@ export const Page = styled.div`
   padding: ${theme.spacing.md};
 `;
 
+export const Title = styled.h1`
+  color: ${theme.colors.text};
+  margin-bottom: ${theme.spacing.md};
+`;
+export const FormCard = styled.div`
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  gap: ${theme.spacing.md};
+  flex-direction: column;
+  background-color: ${theme.colors.surface};
+  border: 1px solid ${theme.colors.border};
+  border-radius: ${theme.radius.sm};
+  padding: ${theme.spacing.lg};
+`;
+
 export const Form = styled.form``;
 
-export const Field = styled.fieldset``;
+export const Field = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
-export const Label = styled.label``;
+export const Label = styled.label`
+  color: ${theme.colors.textMuted};
+  margin: ${theme.spacing.md} 0;
+`;
 
-export const Input = styled.input``;
+export const Input = styled.input`
+  color: ${theme.colors.text};
+  padding: ${theme.spacing.sm};
 
-export const Select = styled.select``;
+  background-color: ${theme.colors.surface};
+  border: 1px solid ${theme.colors.border};
+  border-radius: ${theme.radius.sm};
+`;
+
+export const Select = styled.select`
+  color: ${theme.colors.text};
+  padding: ${theme.spacing.sm};
+
+  background-color: ${theme.colors.surface};
+  border: 1px solid ${theme.colors.border};
+  border-radius: ${theme.radius.sm};
+`;
+
+export const SubmitButton = styled.button`
+  margin: ${theme.spacing.lg} ${theme.spacing.lg} 0 ${theme.spacing.lg};
+
+  display: flex;
+  justify-self: end;
+
+  color: ${theme.colors.text};
+  padding: ${theme.spacing.sm};
+
+  background-color: ${theme.colors.accent};
+  border: 1px solid ${theme.colors.border};
+  border-radius: ${theme.radius.sm};
+  &:hover {
+    background-color: ${theme.colors.accentHover};
+  }
+`;
