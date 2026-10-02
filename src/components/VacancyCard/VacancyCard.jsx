@@ -1,7 +1,6 @@
+import { Text, TextMuted } from "../../styles/common";
 import {
   CardHeader,
-  Text,
-  TextMuted,
   Card,
   CompanyBadge,
   CompanyDescription,
@@ -12,7 +11,7 @@ export default function VacancyCard({ vacancy }) {
   return (
     <Card to={"/vacancies/" + vacancy.id}>
       <CardHeader>
-        <CompanyBadge src={vacancy.badge ? vacancy.badge : ""}></CompanyBadge>
+        <CompanyBadge>{vacancy.company[0]}</CompanyBadge>
         <CompanyDescription>
           <Text>{vacancy.company}</Text>
           <TextMuted>{vacancy.position}</TextMuted>
