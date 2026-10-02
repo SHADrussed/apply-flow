@@ -14,6 +14,11 @@ import { statuses, vacancies } from "../data/vacancies";
 
 export default function VacanciesPage() {
   const [search, setSearch] = useState("");
+  const filteredVacancies = vacancies.filter(
+    (vacancy) =>
+      vacancy.company.toLowerCase().includes(search.toLowerCase()) ||
+      vacancy.position.toLowerCase().includes(search.toLowerCase()),
+  );
   return (
     <Page>
       <Header
@@ -34,7 +39,7 @@ export default function VacanciesPage() {
           Add vacancy
         </AddButton>
       </Toolbar>
-      <KanbanBoard vacancies={vacancies} statuses={statuses} />
+      <KanbanBoard vacancies={filteredVacancies} statuses={statuses} />
     </Page>
   );
 }
