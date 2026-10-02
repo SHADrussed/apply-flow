@@ -15,7 +15,7 @@ export const BackLink = styled(Link)`
   background-color: ${theme.colors.surface};
   border: 1px solid ${theme.colors.border};
   border-radius: ${theme.radius.md};
-  width: 220px;
+  width: fit-content;
   /* Как правильно задать ширину? */
   padding: ${theme.spacing.md};
   gap: ${theme.spacing.sm};
@@ -29,8 +29,8 @@ export const BackLink = styled(Link)`
   }
 `;
 export const DetailsCard = styled.div`
-  /* Как правильно задать ширину? */
-  width: 50vh;
+  width: 100%;
+  max-width: 760px;
   display: flex;
   gap: ${theme.spacing.md};
   flex-direction: column;
@@ -48,28 +48,31 @@ export const DetailsHeader = styled.div`
 
 export const CompanyInfo = styled.div`
   display: flex;
-  gap: ${theme.spacing.md};
+  gap: ${theme.spacing.xs};
   flex-direction: column;
 `;
 
 export const InfoWrapper = styled.div`
   display: flex;
-  justify-content: space-around;
+  flex: 1;
+  justify-content: space-between;
+  align-items: flex-start;
 `;
 export const CompanyName = styled.span``;
 export const Position = styled.span``;
-export const StatusBadge = styled.span``;
+export const StatusBadge = styled.span`
+  padding: 4px 8px;
+  border-radius: ${theme.radius.md};
+  background: ${theme.colors.surfaceHover};
+  color: ${theme.colors.accent};
+  font-size: ${theme.fontSize.md};
+`;
 export const DetailsGrid = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: ${theme.spacing.md};
 `;
 
-export const DetailsWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: ${theme.spacing.xl};
-`;
 export const DetailItem = styled.div`
   display: flex;
   flex-direction: column;

@@ -8,7 +8,6 @@ import {
   DetailsCard,
   DetailsGrid,
   DetailsHeader,
-  DetailsWrapper,
   DetailValue,
   InfoWrapper,
   Page,
@@ -54,16 +53,14 @@ export default function VacancyDetailsPage() {
           </InfoWrapper>
         </DetailsHeader>
         <DetailsGrid>
-          <DetailsWrapper>
-            <DetailItem>
-              <DetailLabel>Salary</DetailLabel>
-              <DetailValue>{vacancy.salary}</DetailValue>
-            </DetailItem>
-            <DetailItem>
-              <DetailLabel>Applied date</DetailLabel>
-              <DetailValue>{vacancy.date}</DetailValue>
-            </DetailItem>
-          </DetailsWrapper>
+          <DetailItem>
+            <DetailLabel>Salary</DetailLabel>
+            <DetailValue>{vacancy.salary}</DetailValue>
+          </DetailItem>
+          <DetailItem>
+            <DetailLabel>Applied date</DetailLabel>
+            <DetailValue>{vacancy.date}</DetailValue>
+          </DetailItem>
           <DetailItem>
             <DetailLabel>Interview time</DetailLabel>
             <DetailValue>{vacancy.time}</DetailValue>
