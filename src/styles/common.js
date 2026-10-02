@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { theme } from "./theme";
 
 export const Wrapper = styled.div`
   max-width: 100%;
@@ -35,4 +36,18 @@ export const AppShell = styled.div`
 export const MainContent = styled.main`
   flex: 1;
   min-width: 0;
+`;
+export const CompanyBadge = styled.div`
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: ${theme.colors.surfaceHover};
+  border-radius: ${theme.radius.sm};
+  color: ${theme.colors.text};
+  font-weight: 600;
 `;

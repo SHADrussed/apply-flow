@@ -1,9 +1,9 @@
+import { CompanyBadge } from "../../styles/common";
 import {
   CardHeader,
   Text,
   TextMuted,
   Card,
-  CompanyBadge,
   CompanyDescription,
   CardMeta,
 } from "./VacancyCard.styled";

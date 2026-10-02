@@ -30,21 +30,6 @@ export const CardHeader = styled.div`
   gap: ${theme.spacing.md};
 `;
 
-export const CompanyBadge = styled.div`
-  width: 36px;
-  height: 36px;
-  flex-shrink: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background-color: ${theme.colors.surfaceHover};
-  border-radius: ${theme.radius.sm};
-  color: ${theme.colors.text};
-  font-weight: 600;
-`;
-
 export const CompanyDescription = styled.div`
   display: flex;
   flex-direction: column;
