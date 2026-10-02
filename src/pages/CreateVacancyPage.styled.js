@@ -7,6 +7,12 @@ export const Page = styled.div`
   padding: ${theme.spacing.md};
 `;
 
+export const Form = styled.form``;
+
+export const Field = styled.fieldset``;
+
+export const Label = styled.label``;
+
 export const Input = styled.input``;
 
 export const Select = styled.select``;

@@ -1,6 +1,13 @@
 import { useState } from "react";
-import { Input, Select } from "./CreateVacancyPage.styled";
-import { Page } from "./VacancyDetailsPage.styled";
+import {
+  Field,
+  Form,
+  Input,
+  Label,
+  Page,
+  Select,
+} from "./CreateVacancyPage.styled";
+import { statuses } from "../data/vacancies";
 
 export default function CreateVacancyPage() {
   const [formData, setFormData] = useState({
@@ -22,20 +29,51 @@ export default function CreateVacancyPage() {
 
   return (
     <Page>
-      <Input name="company" value={formData.company} onChange={handleChange} />
-      <Input
-        name="position"
-        value={formData.position}
-        onChange={handleChange}
-      />
-      <Input name="salary" value={formData.salary} onChange={handleChange} />
-      <Select name="status" value={formData.status} onChange={handleChange} />
-      <Input
-        type="date"
-        name="date"
-        value={formData.date}
-        onChange={handleChange}
-      />
+      <Form onSubmit={""}>
+        <Field>
+          <Label>Company</Label>
+          <Input
+            name="company"
+            value={formData.company}
+            onChange={handleChange}
+          />
+        </Field>
+        <Field>
+          <Label>Position</Label>
+          <Input
+            name="position"
+            value={formData.position}
+            onChange={handleChange}
+          />
+        </Field>
+        <Field>
+          <Label>Salary</Label>
+          <Input
+            name="salary"
+            value={formData.salary}
+            onChange={handleChange}
+          />
+        </Field>
+        <Field>
+          <Label>Status</Label>
+          <Select name="status" value={formData.status} onChange={handleChange}>
+            {statuses.map((status) => (
+              <option key={status} value={status}>
+                {status}
+              </option>
+            ))}
+          </Select>
+        </Field>
+        <Field>
+          <Label>Date</Label>
+          <Input
+            type="date"
+            name="date"
+            value={formData.date}
+            onChange={handleChange}
+          />
+        </Field>
+      </Form>
     </Page>
   );
 }
