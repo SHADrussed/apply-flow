@@ -14,10 +14,13 @@ import { statuses, vacancies } from "../data/vacancies";
 
 export default function VacanciesPage() {
   const [search, setSearch] = useState("");
+
+  const normalizedSearch = search.toLowerCase();
+
   const filteredVacancies = vacancies.filter(
     (vacancy) =>
-      vacancy.company.toLowerCase().includes(search.toLowerCase()) ||
-      vacancy.position.toLowerCase().includes(search.toLowerCase()),
+      vacancy.company.toLowerCase().includes(normalizedSearch) ||
+      vacancy.position.toLowerCase().includes(normalizedSearch),
   );
   return (
     <Page>
