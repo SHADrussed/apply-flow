@@ -1,17 +1,10 @@
+import { useContext } from "react";
+import { VacanciesContext } from "../../сontexts/VacanciesContext";
 import KanbanColumn from "../KanbanColumn/KanbanColumn";
 import { KanbanStyled } from "./KanbanBoard.styled";
 
-export default function KanbanBoard({ vacancies, statuses }) {
-  const statusesVacancies = statuses.map((status) => {
-    const columnVacancies = vacancies.filter(
-      (vacancy) => vacancy.status === status,
-    );
-
-    return {
-      status,
-      columnVacancies,
-    };
-  });
+export default function KanbanBoard() {
+  const { statusesVacancies } = useContext(VacanciesContext);
 
   return (
     <KanbanStyled>

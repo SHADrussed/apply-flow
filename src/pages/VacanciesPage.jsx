@@ -8,20 +8,13 @@ import {
   SearchInput,
   Toolbar,
 } from "./VacanciesPage.styled";
-import { useState } from "react";
+import { useContext } from "react";
 import KanbanBoard from "../components/KanbanBoard/KanbanBoard";
-import { statuses, vacancies } from "../data/vacancies";
+import { VacanciesContext } from "../сontexts/VacanciesContext";
 
 export default function VacanciesPage() {
-  const [search, setSearch] = useState("");
+  const { search, chacngeSearch } = useContext(VacanciesContext);
 
-  const normalizedSearch = search.toLowerCase();
-
-  const filteredVacancies = vacancies.filter(
-    (vacancy) =>
-      vacancy.company.toLowerCase().includes(normalizedSearch) ||
-      vacancy.position.toLowerCase().includes(normalizedSearch),
-  );
   return (
     <Page>
       <Header
@@ -33,7 +26,7 @@ export default function VacanciesPage() {
           <SearchIcon />
           <SearchInput
             value={search}
-            onChange={(event) => setSearch(event.target.value)}
+            onChange={(event) => chacngeSearch(event.target.value)}
             placeholder="Search vacancies..."
           />
         </SearchBlock>
@@ -42,7 +35,7 @@ export default function VacanciesPage() {
           Add vacancy
         </AddButton>
       </Toolbar>
-      <KanbanBoard vacancies={filteredVacancies} statuses={statuses} />
+      <KanbanBoard />
     </Page>
   );
 }

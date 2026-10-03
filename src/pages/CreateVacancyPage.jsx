@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   ErrorText,
   Field,
@@ -11,16 +11,17 @@ import {
   SubmitButton,
   Title,
 } from "./CreateVacancyPage.styled";
-import { statuses } from "../data/vacancies";
 import { BackLink } from "../styles/common";
 import { ArrowLeft } from "lucide-react";
+import { VacanciesContext } from "../сontexts/VacanciesContext";
 
 export default function CreateVacancyPage() {
+  const { statuses, addVacancy } = useContext(VacanciesContext);
   const [formData, setFormData] = useState({
     company: "",
     position: "",
     salary: "",
-    status: "Saved",
+    status: statuses[0],
     date: "",
   });
   const [error, setError] = useState("");
@@ -46,7 +47,8 @@ export default function CreateVacancyPage() {
       id: Date.now(),
       ...formData,
     };
-    console.log(newVacancy);
+
+    addVacancy(newVacancy);
 
     setError("");
   };
