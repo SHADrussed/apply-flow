@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {
+  ErrorText,
   Field,
   Form,
   FormCard,
@@ -22,6 +23,7 @@ export default function CreateVacancyPage() {
     status: "Saved",
     date: "",
   });
+  const [error, setError] = useState("");
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -34,6 +36,19 @@ export default function CreateVacancyPage() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    if (!formData.company.trim() || !formData.position.trim()) {
+      setError("Company and position are required");
+      return;
+    }
+
+    const newVacancy = {
+      id: Date.now(),
+      ...formData,
+    };
+    console.log(newVacancy);
+
+    setError("");
   };
 
   return (
@@ -95,7 +110,8 @@ export default function CreateVacancyPage() {
               onChange={handleChange}
             />
           </Field>
-          <SubmitButton>Create</SubmitButton>
+          {error && <ErrorText>{error}</ErrorText>}
+          <SubmitButton onClick={handleSubmit}>Create</SubmitButton>
         </Form>
       </FormCard>
     </Page>

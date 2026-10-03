@@ -23,7 +23,11 @@ export const FormCard = styled.div`
   padding: ${theme.spacing.lg};
 `;
 
-export const Form = styled.form``;
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
 
 export const Field = styled.div`
   display: flex;
@@ -36,28 +40,44 @@ export const Label = styled.label`
 `;
 
 export const Input = styled.input`
-  color: ${theme.colors.text};
-  padding: ${theme.spacing.sm};
+  color-scheme: dark;
 
-  background-color: ${theme.colors.surface};
+  width: 100%;
+  min-height: 42px;
+  padding: ${theme.spacing.sm} ${theme.spacing.md};
+
+  color: ${theme.colors.text};
+  background-color: ${theme.colors.background};
   border: 1px solid ${theme.colors.border};
   border-radius: ${theme.radius.sm};
+
+  outline: none;
+
+  &:focus {
+    border-color: ${theme.colors.accent};
+  }
+  &::-webkit-calendar-picker-indicator {
+    opacity: 0.6;
+    cursor: pointer;
+  }
 `;
 
 export const Select = styled.select`
   color: ${theme.colors.text};
   padding: ${theme.spacing.sm};
 
-  background-color: ${theme.colors.surface};
+  background-color: ${theme.colors.background};
   border: 1px solid ${theme.colors.border};
   border-radius: ${theme.radius.sm};
 `;
 
+export const ErrorText = styled.span`
+  color: ${theme.colors.errorMessage};
+  padding: ${theme.spacing.xs};
+`;
+
 export const SubmitButton = styled.button`
   margin: ${theme.spacing.lg} ${theme.spacing.lg} 0 ${theme.spacing.lg};
-
-  display: flex;
-  justify-self: end;
 
   color: ${theme.colors.text};
   padding: ${theme.spacing.sm};

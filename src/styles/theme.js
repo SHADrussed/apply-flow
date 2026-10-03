@@ -8,6 +8,7 @@ export const theme = {
     textMuted: "#8B96A5",
     accent: "#7C6CFF",
     accentHover: "#553eff",
+    errorMessage: "#ff6b6b",
   },
 
   radius: {
