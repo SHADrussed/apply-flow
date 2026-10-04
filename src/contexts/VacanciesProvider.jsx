@@ -8,7 +8,7 @@ const initialVacancies = [
     position: "Frontend Developer",
     status: "Interview",
     salary: "$3000–4000",
-    date: "Sep 28",
+    date: "2026-09-28",
     time: "14:00",
   },
   {
@@ -17,7 +17,7 @@ const initialVacancies = [
     position: "Junior Frontend",
     status: "Applied",
     salary: "$2000",
-    date: "Oct 14",
+    date: "2026-09-26",
     time: "12:00",
   },
   {
@@ -26,7 +26,7 @@ const initialVacancies = [
     position: "Middle Frontend",
     status: "Rejected",
     salary: "$4000",
-    date: "Nov 22",
+    date: "2026-09-30",
     time: "12:00",
   },
   {
@@ -35,7 +35,7 @@ const initialVacancies = [
     position: "Senior Frontend",
     status: "Rejected",
     salary: "$5000",
-    date: "Sep 22",
+    date: "2026-09-28",
     time: "13:00",
   },
   {
@@ -44,7 +44,7 @@ const initialVacancies = [
     position: "Junior Frontend",
     status: "Interview",
     salary: "$2500-3000",
-    date: "Jan 12",
+    date: "2026-10-31",
     time: "11:45",
   },
 ];
@@ -64,7 +64,7 @@ function VacanciesProvider({ children }) {
   );
 
   const statusesVacancies = statuses.map((status) => {
-    const columnVacancies = vacancies.filter(
+    const columnVacancies = filteredVacancies.filter(
       (vacancy) => vacancy.status === status,
     );
 
@@ -74,11 +74,20 @@ function VacanciesProvider({ children }) {
     };
   });
 
-  async function addVacancy(vacancyData) {
-    setVacancies([...vacancies, vacancyData]);
+  function addVacancy(vacancyData) {
+    setVacancies((prev) => [...prev, vacancyData]);
   }
-  async function changeSearch(search) {
+  function changeSearch(search) {
     setSearch(search);
+  }
+  function getVacancy(id) {
+    return vacancies.find((vacancy) => vacancy.id === Number(id));
+  }
+  function updateVacancy(id, updatedData) {
+    console.log(updatedData.id, id);
+    setVacancies((prev) =>
+      prev.map((vacancy) => (vacancy.id === id ? updatedData : vacancy)),
+    );
   }
 
   return (
@@ -88,7 +97,10 @@ function VacanciesProvider({ children }) {
         statuses,
         statusesVacancies,
         addVacancy,
+        search,
         changeSearch,
+        getVacancy,
+        updateVacancy,
       }}
     >
       {children}

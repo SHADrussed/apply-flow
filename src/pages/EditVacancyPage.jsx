@@ -13,17 +13,20 @@ import {
 } from "./CreateVacancyPage.styled";
 import { BackLink } from "../styles/common";
 import { ArrowLeft } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { VacanciesContext } from "../contexts/VacanciesContext";
 
-export default function CreateVacancyPage() {
-  const { statuses, addVacancy } = useContext(VacanciesContext);
+export default function EditVacancyPage() {
+  const { statuses, getVacancy, updateVacancy } = useContext(VacanciesContext);
+  const { id } = useParams();
+  const vacancy = getVacancy(id);
+
   const [formData, setFormData] = useState({
-    company: "",
-    position: "",
-    salary: "",
-    status: statuses[0],
-    date: "",
+    company: vacancy.company,
+    position: vacancy.position,
+    salary: vacancy.salary,
+    status: vacancy.status,
+    date: vacancy.date,
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -49,13 +52,13 @@ export default function CreateVacancyPage() {
       return;
     }
 
-    const newVacancy = {
-      id: Date.now(),
+    const updatedVacancy = {
+      ...vacancy,
       ...formData,
     };
 
-    addVacancy(newVacancy);
-    navigate(`/vacancies`);
+    updateVacancy(vacancy.id, updatedVacancy);
+    navigate(`/vacancies/${vacancy.id}`);
 
     setError("");
   };

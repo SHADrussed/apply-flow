@@ -4,6 +4,7 @@ import AppLayout from "../layout/AppLayout";
 import VacancyDetailsPage from "../pages/VacancyDetailsPage";
 import DashboardPage from "../pages/DashboardPage";
 import CreateVacancyPage from "../pages/CreateVacancyPage";
+import EditVacancyPage from "../pages/EditVacancyPage";
 
 function AppRoutes() {
   return (
@@ -15,6 +16,7 @@ function AppRoutes() {
             <Route path="vacancies" element={<VacanciesPage />} />
             <Route path="vacancies/:id" element={<VacancyDetailsPage />} />
             <Route path="vacancies/new" element={<CreateVacancyPage />} />
+            <Route path="vacancies/:id/edit" element={<EditVacancyPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

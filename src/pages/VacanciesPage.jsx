@@ -10,10 +10,10 @@ import {
 } from "./VacanciesPage.styled";
 import { useContext } from "react";
 import KanbanBoard from "../components/KanbanBoard/KanbanBoard";
-import { VacanciesContext } from "../сontexts/VacanciesContext";
+import { VacanciesContext } from "../contexts/VacanciesContext";
 
 export default function VacanciesPage() {
-  const { search, chacngeSearch } = useContext(VacanciesContext);
+  const { search, changeSearch } = useContext(VacanciesContext);
 
   return (
     <Page>
@@ -26,7 +26,7 @@ export default function VacanciesPage() {
           <SearchIcon />
           <SearchInput
             value={search}
-            onChange={(event) => chacngeSearch(event.target.value)}
+            onChange={(event) => changeSearch(event.target.value)}
             placeholder="Search vacancies..."
           />
         </SearchBlock>

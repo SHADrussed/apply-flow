@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { theme } from "../styles/theme";
+import { BackLink } from "../styles/common";
 
 export const Page = styled.div`
   background-color: ${theme.colors.background};
@@ -64,4 +65,7 @@ export const DetailLabel = styled.span`
 `;
 export const DetailValue = styled.span`
   color: ${theme.colors.text};
+`;
+export const EditButton = styled(BackLink)`
+  margin-top: ${theme.spacing.md};
 `;

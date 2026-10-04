@@ -8,20 +8,23 @@ import {
   DetailsGrid,
   DetailsHeader,
   DetailValue,
+  EditButton,
   InfoWrapper,
   Page,
   Position,
   StatusBadge,
   Text,
 } from "./VacancyDetailsPage.styled";
-import { vacancies } from "../data/vacancies";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Edit } from "lucide-react";
 import { BackLink, CompanyBadge } from "../styles/common";
+import { useContext } from "react";
+import { VacanciesContext } from "../contexts/VacanciesContext";
+import { formatDate } from "../utils/formatDate";
 
 export default function VacancyDetailsPage() {
   const { id } = useParams();
-
-  const vacancy = vacancies.find((vacancy) => vacancy.id === Number(id));
+  const { getVacancy } = useContext(VacanciesContext);
+  const vacancy = getVacancy(id);
 
   if (!vacancy) {
     return (
@@ -58,14 +61,18 @@ export default function VacancyDetailsPage() {
           </DetailItem>
           <DetailItem>
             <DetailLabel>Applied date</DetailLabel>
-            <DetailValue>{vacancy.date}</DetailValue>
+            <DetailValue>{formatDate(vacancy.date)}</DetailValue>
           </DetailItem>
-          <DetailItem>
+          {/* <DetailItem>
             <DetailLabel>Interview time</DetailLabel>
             <DetailValue>{vacancy.time}</DetailValue>
-          </DetailItem>
+          </DetailItem> */}
         </DetailsGrid>
       </DetailsCard>
+      <EditButton to={`/vacancies/${vacancy.id}/edit`}>
+        <Edit />
+        Edit
+      </EditButton>
     </Page>
   );
 }

@@ -1,4 +1,5 @@
 import { CompanyBadge } from "../../styles/common";
+import { formatDate } from "../../utils/formatDate";
 import {
   CardHeader,
   Text,
@@ -20,7 +21,7 @@ export default function VacancyCard({ vacancy }) {
       </CardHeader>
       <CardMeta>
         <Text>{vacancy.salary}</Text>
-        <TextMuted>{vacancy.date}</TextMuted>
+        <TextMuted>{formatDate(vacancy.date)}</TextMuted>
       </CardMeta>
     </Card>
   );

@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import { VacanciesContext } from "../../сontexts/VacanciesContext";
 import KanbanColumn from "../KanbanColumn/KanbanColumn";
 import { KanbanStyled } from "./KanbanBoard.styled";
+import { VacanciesContext } from "../../contexts/VacanciesContext";
 
 export default function KanbanBoard() {
   const { statusesVacancies } = useContext(VacanciesContext);
