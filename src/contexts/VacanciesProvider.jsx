@@ -84,9 +84,10 @@ function VacanciesProvider({ children }) {
     return vacancies.find((vacancy) => vacancy.id === Number(id));
   }
   function updateVacancy(id, updatedData) {
-    console.log(updatedData.id, id);
     setVacancies((prev) =>
-      prev.map((vacancy) => (vacancy.id === id ? updatedData : vacancy)),
+      prev.map((vacancy) =>
+        vacancy.id === Number(id) ? updatedData : vacancy,
+      ),
     );
   }
 
