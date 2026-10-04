@@ -84,14 +84,15 @@ function VacanciesProvider({ children }) {
     return vacancies.find((vacancy) => vacancy.id === Number(id));
   }
   function updateVacancy(id, updatedData) {
-    const updatedVacancy = { id, ...updatedData };
-    console.log(Number(id), updatedVacancy);
+    const updatedVacancy = {
+      id: Number(id),
+      ...updatedData,
+    };
     setVacancies((prev) =>
       prev.map((vacancy) =>
         vacancy.id === Number(id) ? updatedVacancy : vacancy,
       ),
     );
-    console.log(vacancies);
   }
 
   return (

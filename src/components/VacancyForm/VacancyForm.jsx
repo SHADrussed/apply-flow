@@ -15,7 +15,11 @@ import { BackLink } from "../../styles/common";
 import { ArrowLeft } from "lucide-react";
 import { VacanciesContext } from "../../contexts/VacanciesContext";
 
-export default function VacancyForm({ initialData, onSubmit }) {
+export default function VacancyForm({
+  initialData,
+  onSubmit,
+  isEditing = true,
+}) {
   const { statuses } = useContext(VacanciesContext);
   const [formData, setFormData] = useState({
     company: initialData.company,
@@ -109,7 +113,9 @@ export default function VacancyForm({ initialData, onSubmit }) {
             />
           </Field>
           {error && <ErrorText>{error}</ErrorText>}
-          <SubmitButton type="submit">Create</SubmitButton>
+          <SubmitButton type="submit">
+            {isEditing ? "Save changes" : "Create"}
+          </SubmitButton>
         </Form>
       </FormCard>
     </Page>
