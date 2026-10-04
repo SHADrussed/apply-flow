@@ -76,4 +76,17 @@ export const ButtonsContainer = styled.div`
 `;
 export const EditButton = styled(BackLink)``;
 
-export const DeleteButton = styled(BackLink)``;
+export const DeleteButton = styled.button`
+  color: ${theme.colors.accent};
+  background-color: ${theme.colors.surface};
+  border: 1px solid ${theme.colors.border};
+  border-radius: ${theme.radius.md};
+  width: fit-content;
+  padding: ${theme.spacing.md};
+  gap: ${theme.spacing.sm};
+
+  &:hover {
+    color: ${theme.colors.accentHover};
+    background-color: ${theme.colors.surfaceHover};
+  }
+`;
