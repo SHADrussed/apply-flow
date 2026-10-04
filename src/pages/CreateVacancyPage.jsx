@@ -30,7 +30,9 @@ export default function CreateVacancyPage() {
     <VacancyForm
       initialData={initialData}
       onSubmit={onSubmit}
-      isEditing={false}
+      statuses={statuses}
+      title="Add vacancy"
+      submitLabel="Create"
     />
   );
 }

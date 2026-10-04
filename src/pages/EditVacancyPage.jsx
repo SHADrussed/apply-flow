@@ -8,7 +8,7 @@ export default function EditVacancyPage() {
   const { getVacancy } = useContext(VacanciesContext);
   const { id } = useParams();
   const vacancy = getVacancy(id);
-  const { updateVacancy } = useContext(VacanciesContext);
+  const { updateVacancy, statuses } = useContext(VacanciesContext);
   const navigate = useNavigate();
 
   function onSubmit(formData) {
@@ -20,5 +20,13 @@ export default function EditVacancyPage() {
     return <Page>Vacancy not found</Page>;
   }
 
-  return <VacancyForm initialData={vacancy} onSubmit={onSubmit} />;
+  return (
+    <VacancyForm
+      initialData={vacancy}
+      onSubmit={onSubmit}
+      statuses={statuses}
+      title="Edit vacancy"
+      submitLabel="Save changes"
+    />
+  );
 }
