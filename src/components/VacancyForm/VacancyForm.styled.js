@@ -9,7 +9,7 @@ export const Page = styled.div`
 
 export const Title = styled.h1`
   color: ${theme.colors.text};
-  margin-bottom: ${theme.spacing.md};
+  margin: ${theme.spacing.md} 0;
 `;
 export const FormCard = styled.div`
   width: 100%;

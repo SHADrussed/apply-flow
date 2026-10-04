@@ -1,7 +1,9 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
+  ButtonsContainer,
   CompanyInfo,
   CompanyName,
+  DeleteButton,
   DetailItem,
   DetailLabel,
   DetailsCard,
@@ -23,8 +25,22 @@ import { formatDate } from "../utils/formatDate";
 
 export default function VacancyDetailsPage() {
   const { id } = useParams();
-  const { getVacancy } = useContext(VacanciesContext);
+  const { getVacancy, deleteVacancy } = useContext(VacanciesContext);
   const vacancy = getVacancy(id);
+  const navigate = useNavigate();
+
+  function handleDelete() {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this vacancy?",
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    deleteVacancy(vacancy.id);
+    navigate("/vacancies");
+  }
 
   if (!vacancy) {
     return (
@@ -68,11 +84,14 @@ export default function VacancyDetailsPage() {
             <DetailValue>{vacancy.time}</DetailValue>
           </DetailItem> */}
         </DetailsGrid>
+        <ButtonsContainer>
+          <EditButton to={`/vacancies/${vacancy.id}/edit`}>
+            <Edit />
+            Edit
+          </EditButton>
+          <DeleteButton onClick={handleDelete}>Delete</DeleteButton>
+        </ButtonsContainer>
       </DetailsCard>
-      <EditButton to={`/vacancies/${vacancy.id}/edit`}>
-        <Edit />
-        Edit
-      </EditButton>
     </Page>
   );
 }

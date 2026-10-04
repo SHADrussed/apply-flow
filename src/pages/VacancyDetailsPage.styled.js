@@ -22,6 +22,7 @@ export const DetailsCard = styled.div`
   border-radius: ${theme.radius.md};
 
   padding: ${theme.spacing.md};
+  margin: ${theme.spacing.md} 0;
 `;
 export const DetailsHeader = styled.div`
   display: flex;
@@ -66,6 +67,13 @@ export const DetailLabel = styled.span`
 export const DetailValue = styled.span`
   color: ${theme.colors.text};
 `;
-export const EditButton = styled(BackLink)`
+
+export const ButtonsContainer = styled.div`
   margin-top: ${theme.spacing.md};
+
+  display: flex;
+  justify-content: space-between;
 `;
+export const EditButton = styled(BackLink)``;
+
+export const DeleteButton = styled(BackLink)``;

@@ -62,7 +62,6 @@ export const BackLink = styled(Link)`
   /* Как правильно задать ширину? */
   padding: ${theme.spacing.md};
   gap: ${theme.spacing.sm};
-  margin-bottom: ${theme.spacing.lg};
 
   display: flex;
   align-items: center;

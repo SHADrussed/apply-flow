@@ -81,7 +81,8 @@ function VacanciesProvider({ children }) {
     setSearch(search);
   }
   function getVacancy(id) {
-    return vacancies.find((vacancy) => vacancy.id === Number(id));
+    const numericId = Number(id);
+    return vacancies.find((vacancy) => vacancy.id === numericId);
   }
   function updateVacancy(id, updatedData) {
     const numericId = Number(id);
@@ -98,6 +99,11 @@ function VacanciesProvider({ children }) {
       ),
     );
   }
+  function deleteVacancy(id) {
+    const numericId = Number(id);
+
+    setVacancies((prev) => prev.filter((vacancy) => vacancy.id !== numericId));
+  }
 
   return (
     <VacanciesContext.Provider
@@ -110,6 +116,7 @@ function VacanciesProvider({ children }) {
         changeSearch,
         getVacancy,
         updateVacancy,
+        deleteVacancy,
       }}
     >
       {children}
