@@ -5,20 +5,11 @@ import { VacanciesContext } from "../../contexts/VacanciesContext";
 import { DndContext } from "@dnd-kit/core";
 
 export default function KanbanBoard() {
-  const { statusesVacancies } = useContext(VacanciesContext);
-
-  function handleDragEnd(event) {
-    console.log(event.active.id);
-    console.log(event.over?.id);
-  }
-  function handleDragStart(event) {
-    console.log(event.active.id);
-    console.log(event.over?.id);
-  }
+  const { statusesVacancies, handleDragEnd } = useContext(VacanciesContext);
 
   return (
-    <DndContext>
-      <KanbanStyled onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+    <DndContext onDragEnd={handleDragEnd}>
+      <KanbanStyled>
         {statusesVacancies.map((column) => (
           <KanbanColumn
             key={column.status}
