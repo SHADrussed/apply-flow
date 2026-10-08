@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import { theme } from "../../styles/theme";
 
-export const ColumnStyled = styled.div``;
+export const ColumnStyled = styled.div`
+  background-color: ${(props) =>
+    props.isOver ? props.theme.colors.surface : props.theme.colors.backgound};
+`;
 
 export const ColumnTitle = styled.h2`
   margin-bottom: ${theme.spacing.md};

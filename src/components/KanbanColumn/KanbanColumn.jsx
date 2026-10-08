@@ -8,11 +8,9 @@ import {
 } from "./KanbanColumn.styled";
 
 export default function KanbanColumn({ title, vacancies }) {
-  useDroppable({
-    id: title,
-  });
+  const { setNodeRef, isOver } = useDroppable({ id: title });
   return (
-    <ColumnStyled>
+    <ColumnStyled ref={setNodeRef} isOver={isOver}>
       <ColumnTitle>
         {title} <span>{vacancies.length}</span>
       </ColumnTitle>

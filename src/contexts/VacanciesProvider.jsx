@@ -104,6 +104,21 @@ function VacanciesProvider({ children }) {
 
     setVacancies((prev) => prev.filter((vacancy) => vacancy.id !== numericId));
   }
+  function handleDragEnd(event) {
+    if (!event.over) {
+      return;
+    } else if (event.over.id === getVacancy(event.active.id).status) {
+      return;
+    }
+
+    setVacancies((prev) =>
+      prev.map((vacancy) =>
+        vacancy.id === event.active.id
+          ? { ...vacancy, status: event.over.id }
+          : vacancy,
+      ),
+    );
+  }
 
   return (
     <VacanciesContext.Provider
@@ -117,6 +132,7 @@ function VacanciesProvider({ children }) {
         getVacancy,
         updateVacancy,
         deleteVacancy,
+        handleDragEnd,
       }}
     >
       {children}
