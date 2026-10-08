@@ -1,3 +1,4 @@
+import { useDraggable } from "@dnd-kit/core";
 import { CompanyBadge } from "../../styles/common";
 import { formatDate } from "../../utils/formatDate";
 import {
@@ -10,8 +11,16 @@ import {
 } from "./VacancyCard.styled";
 
 export default function VacancyCard({ vacancy }) {
+  const { attributes, listeners, setNodeRef } = useDraggable({
+    id: vacancy.id,
+  });
   return (
-    <Card to={"/vacancies/" + vacancy.id}>
+    <Card
+      {...listeners}
+      {...attributes}
+      ref={setNodeRef}
+      to={"/vacancies/" + vacancy.id}
+    >
       <CardHeader>
         <CompanyBadge>{vacancy.company[0]}</CompanyBadge>
         <CompanyDescription>

@@ -1,3 +1,4 @@
+import { useDroppable } from "@dnd-kit/core";
 import VacancyCard from "../VacancyCard/VacancyCard";
 import {
   ColumnStyled,
@@ -7,6 +8,9 @@ import {
 } from "./KanbanColumn.styled";
 
 export default function KanbanColumn({ title, vacancies }) {
+  useDroppable({
+    id: title,
+  });
   return (
     <ColumnStyled>
       <ColumnTitle>
