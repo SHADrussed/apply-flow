@@ -105,20 +105,29 @@ function VacanciesProvider({ children }) {
     setVacancies((prev) => prev.filter((vacancy) => vacancy.id !== numericId));
   }
 
-  function handleDragEnd(event) {
-    const { source, target } = event.operation;
+  function handleDragEnd({ canceled, operation }) {
+    if (canceled) return;
 
-    if (event.canceled || !source || !target) {
-      return;
-    } else if (target.id === getVacancy(source.id).status) {
+    const sourceId = Number(operation?.source?.id);
+    const targetStatus = operation?.target?.id;
+
+    if (!Number.isFinite(sourceId) || !statuses.includes(targetStatus)) {
       return;
     }
 
-    setVacancies((prev) =>
-      prev.map((vacancy) =>
-        vacancy.id === source.id ? { ...vacancy, status: target.id } : vacancy,
-      ),
-    );
+    setVacancies((prev) => {
+      const currentVacancy = prev.find((vacancy) => vacancy.id === sourceId);
+
+      if (!currentVacancy || currentVacancy.status === targetStatus) {
+        return prev;
+      }
+
+      return prev.map((vacancy) =>
+        vacancy.id === sourceId
+          ? { ...vacancy, status: targetStatus }
+          : vacancy,
+      );
+    });
   }
 
   return (
