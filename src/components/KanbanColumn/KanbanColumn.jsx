@@ -8,13 +8,13 @@ import {
 } from "./KanbanColumn.styled";
 
 export default function KanbanColumn({ title, vacancies }) {
-  const { ref } = useDroppable({ id: title });
+  const { ref, isDropTarget } = useDroppable({ id: title });
   return (
-    <ColumnStyled>
+    <ColumnStyled ref={ref} $isOver={isDropTarget}>
       <ColumnTitle>
         {title} <span>{vacancies.length}</span>
       </ColumnTitle>
-      <VacancyCards ref={ref}>
+      <VacancyCards>
         {vacancies.length === 0 ? (
           <EmptyState>No vacancies</EmptyState>
         ) : (

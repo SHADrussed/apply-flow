@@ -106,17 +106,17 @@ function VacanciesProvider({ children }) {
   }
 
   function handleDragEnd(event) {
-    if (!event.target) {
+    const { source, target } = event.operation;
+
+    if (event.canceled || !source || !target) {
       return;
-    } else if (event.target.id === getVacancy(event.source.id).status) {
+    } else if (target.id === getVacancy(source.id).status) {
       return;
     }
 
     setVacancies((prev) =>
       prev.map((vacancy) =>
-        vacancy.id === event.source.id
-          ? { ...vacancy, status: event.target.id }
-          : vacancy,
+        vacancy.id === source.id ? { ...vacancy, status: target.id } : vacancy,
       ),
     );
   }
