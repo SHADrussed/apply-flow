@@ -1,4 +1,4 @@
-import { useDroppable } from "@dnd-kit/core";
+import { useDroppable } from "@dnd-kit/react";
 import VacancyCard from "../VacancyCard/VacancyCard";
 import {
   ColumnStyled,
@@ -8,13 +8,13 @@ import {
 } from "./KanbanColumn.styled";
 
 export default function KanbanColumn({ title, vacancies }) {
-  const { setNodeRef, isOver } = useDroppable({ id: title });
+  const { ref } = useDroppable({ id: title });
   return (
-    <ColumnStyled ref={setNodeRef} isOver={isOver}>
+    <ColumnStyled>
       <ColumnTitle>
         {title} <span>{vacancies.length}</span>
       </ColumnTitle>
-      <VacancyCards>
+      <VacancyCards ref={ref}>
         {vacancies.length === 0 ? (
           <EmptyState>No vacancies</EmptyState>
         ) : (

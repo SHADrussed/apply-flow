@@ -1,4 +1,4 @@
-import { useDraggable } from "@dnd-kit/core";
+import { useDraggable } from "@dnd-kit/react";
 import { CompanyBadge } from "../../styles/common";
 import { formatDate } from "../../utils/formatDate";
 import {
@@ -11,16 +11,11 @@ import {
 } from "./VacancyCard.styled";
 
 export default function VacancyCard({ vacancy }) {
-  const { attributes, listeners, setNodeRef } = useDraggable({
+  const { ref, isDragging } = useDraggable({
     id: vacancy.id,
   });
   return (
-    <Card
-      {...listeners}
-      {...attributes}
-      ref={setNodeRef}
-      to={"/vacancies/" + vacancy.id}
-    >
+    <Card ref={ref} data-dragging={isDragging} to={"/vacancies/" + vacancy.id}>
       <CardHeader>
         <CompanyBadge>{vacancy.company[0]}</CompanyBadge>
         <CompanyDescription>

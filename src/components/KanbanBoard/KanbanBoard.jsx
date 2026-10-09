@@ -2,13 +2,13 @@ import { useContext } from "react";
 import KanbanColumn from "../KanbanColumn/KanbanColumn";
 import { KanbanStyled } from "./KanbanBoard.styled";
 import { VacanciesContext } from "../../contexts/VacanciesContext";
-import { DndContext } from "@dnd-kit/core";
+import { DragDropProvider } from "@dnd-kit/react";
 
 export default function KanbanBoard() {
   const { statusesVacancies, handleDragEnd } = useContext(VacanciesContext);
 
   return (
-    <DndContext onDragEnd={handleDragEnd}>
+    <DragDropProvider onDragEnd={handleDragEnd}>
       <KanbanStyled>
         {statusesVacancies.map((column) => (
           <KanbanColumn
@@ -18,6 +18,6 @@ export default function KanbanBoard() {
           />
         ))}
       </KanbanStyled>
-    </DndContext>
+    </DragDropProvider>
   );
 }

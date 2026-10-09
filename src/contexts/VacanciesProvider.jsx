@@ -104,17 +104,18 @@ function VacanciesProvider({ children }) {
 
     setVacancies((prev) => prev.filter((vacancy) => vacancy.id !== numericId));
   }
+
   function handleDragEnd(event) {
-    if (!event.over) {
+    if (!event.target) {
       return;
-    } else if (event.over.id === getVacancy(event.active.id).status) {
+    } else if (event.target.id === getVacancy(event.source.id).status) {
       return;
     }
 
     setVacancies((prev) =>
       prev.map((vacancy) =>
-        vacancy.id === event.active.id
-          ? { ...vacancy, status: event.over.id }
+        vacancy.id === event.source.id
+          ? { ...vacancy, status: event.target.id }
           : vacancy,
       ),
     );
