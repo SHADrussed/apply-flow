@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { VacanciesContext } from "./VacanciesContext";
 
 const initialVacancies = [
@@ -51,7 +51,29 @@ const initialVacancies = [
 const statuses = ["Saved", "Applied", "Interview", "Offer", "Rejected"];
 
 function VacanciesProvider({ children }) {
-  const [vacancies, setVacancies] = useState(initialVacancies);
+  const [vacancies, setVacancies] = useState(() => {
+    try {
+      const saved = localStorage.getItem("vacancies");
+
+      if (!saved) {
+        return initialVacancies;
+      }
+
+      const parsed = JSON.parse(saved);
+
+      if (Array.isArray(parsed)) {
+        return parsed;
+      }
+      return initialVacancies;
+    } catch (error) {
+      console.warn("Ошибка загрузки вакансий", error);
+      return initialVacancies;
+    }
+  });
+
+  useEffect(() => {
+    localStorage.setItem("vacancies", JSON.stringify(vacancies));
+  }, [vacancies]);
 
   const [search, setSearch] = useState("");
 
