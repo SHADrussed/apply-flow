@@ -1,4 +1,3 @@
-import { useDraggable } from "@dnd-kit/react";
 import { CompanyBadge } from "../../styles/common";
 import { formatDate } from "../../utils/formatDate";
 import {
@@ -9,10 +8,13 @@ import {
   CompanyDescription,
   CardMeta,
 } from "./VacancyCard.styled";
+import { useSortable } from "@dnd-kit/react/sortable";
 
-export default function VacancyCard({ vacancy }) {
-  const { ref, isDragging } = useDraggable({
+export default function VacancyCard({ vacancy, index, group }) {
+  const { ref, isDragging } = useSortable({
     id: vacancy.id,
+    index,
+    group,
   });
   return (
     <Card ref={ref} data-dragging={isDragging} to={"/vacancies/" + vacancy.id}>

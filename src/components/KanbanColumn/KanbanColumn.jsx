@@ -18,8 +18,13 @@ export default function KanbanColumn({ title, vacancies }) {
         {vacancies.length === 0 ? (
           <EmptyState>No vacancies</EmptyState>
         ) : (
-          vacancies.map((vacancy) => (
-            <VacancyCard key={vacancy.id} vacancy={vacancy} />
+          vacancies.map((vacancy, index) => (
+            <VacancyCard
+              key={vacancy.id}
+              index={index}
+              group={title}
+              vacancy={vacancy}
+            />
           ))
         )}
       </VacancyCards>

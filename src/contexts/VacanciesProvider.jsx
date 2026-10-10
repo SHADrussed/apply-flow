@@ -152,6 +152,14 @@ function VacanciesProvider({ children }) {
     });
   }
 
+  function reorder(items, fromIndex, toIndex) {
+    const columnItems = [...items];
+    const [removed] = columnItems.splice(fromIndex, 1);
+
+    columnItems.splice(toIndex, 0, removed);
+    return columnItems;
+  }
+
   return (
     <VacanciesContext.Provider
       value={{
@@ -165,6 +173,7 @@ function VacanciesProvider({ children }) {
         updateVacancy,
         deleteVacancy,
         handleDragEnd,
+        reorder,
       }}
     >
       {children}
