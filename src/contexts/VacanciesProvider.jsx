@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { VacanciesContext } from "./VacanciesContext";
+import { isSortable } from "@dnd-kit/react/sortable";
 
 const initialVacancies = [
   {
@@ -128,6 +129,17 @@ function VacanciesProvider({ children }) {
   }
 
   function handleDragEnd({ canceled, operation }) {
+    const { source } = operation;
+
+    if (isSortable(source)) {
+      console.log({
+        initialIndex: source.initialIndex,
+        index: source.index,
+        initialGroup: source.initialGroup,
+        group: source.group,
+      });
+    }
+
     if (canceled) return;
 
     const sourceId = Number(operation?.source?.id);
