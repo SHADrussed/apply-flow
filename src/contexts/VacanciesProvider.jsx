@@ -129,62 +129,82 @@ function VacanciesProvider({ children }) {
   }
 
   function handleDragEnd({ canceled, operation }) {
+    // Если пользователь отменил перетаскивание
     if (canceled || !operation) return;
 
     const { source, target } = operation;
 
+    // Работаем только с сортируемыми карточками
     if (!isSortable(source)) return;
 
-    if (isSortable(source)) {
-      console.log({
-        initialIndex: source.initialIndex,
-        index: source.index,
-        initialGroup: source.initialGroup,
-        group: source.group,
-      });
-    }
+    const sourceId = Number(source.id);
 
-    const sourceId = Number(operation?.source?.id);
-    const targetStatus = operation?.target?.id;
+    if (!Number.isFinite(sourceId)) return;
 
-    if (source.initialGroup === source.group && targetStatus === sourceId) {
-      if (source.initialIndex === source.index) return;
-      if (!Number.isFinite(sourceId) || !statuses.includes(targetStatus)) {
-        return;
+    setVacancies((prev) => {
+      // Находим карточку, которую перетащили
+      const draggedVacancy = prev.find((vacancy) => vacancy.id === sourceId);
+
+      if (!draggedVacancy) return prev;
+
+      // Определяем колонку, в которую перетащили карточку
+      const targetVacancy = prev.find(
+        (vacancy) => vacancy.id === Number(target?.id),
+      );
+
+      const targetStatus =
+        source.group !== source.initialGroup && statuses.includes(source.group)
+          ? source.group
+          : statuses.includes(target?.id)
+            ? target.id
+            : (targetVacancy?.status ?? source.group);
+
+      if (!statuses.includes(targetStatus)) return prev;
+
+      // СЛУЧАЙ 1. Перенос в другую колонку.
+      if (draggedVacancy.status !== targetStatus) {
+        return prev.map((vacancy) =>
+          vacancy.id === sourceId
+            ? { ...vacancy, status: targetStatus }
+            : vacancy,
+        );
       }
 
-      setVacancies((prev) => {
-        const columnVacancies = prev.filter(
-          (vacancy) => vacancy.status === source.initialGroup,
-        );
+      // СЛУЧАЙ 2. Перестановка внутри одной колонки.
+      const fromIndex = source.initialIndex;
+      const toIndex = source.index;
 
-        const reorderedColumn = reorder(
-          columnVacancies,
-          source.initialIndex,
-          source.index,
-        );
+      if (fromIndex === toIndex) return prev;
 
-        let nextIndex = 0;
+      // Получаем только карточки нужной колонки.
+      const columnVacancies = prev.filter(
+        (vacancy) => vacancy.status === targetStatus,
+      );
 
-        return prev.map((vacancy) => {
-          if (vacancy.status !== source.initialGroup) {
-            return vacancy;
-          }
+      // Проверяем, что индексы существуют.
+      if (
+        !Number.isInteger(fromIndex) ||
+        !Number.isInteger(toIndex) ||
+        fromIndex < 0 ||
+        toIndex < 0 ||
+        fromIndex >= columnVacancies.length ||
+        toIndex >= columnVacancies.length
+      ) {
+        return prev;
+      }
 
-          const newVacancy = reorderedColumn[nextIndex];
-          nextIndex++;
+      // Переставляем карточки внутри колонки.
+      const reorderedColumn = reorder(columnVacancies, fromIndex, toIndex);
 
-          return newVacancy;
-        });
-      });
-      return;
-    }
+      let nextIndex = 0;
 
-    //перенос между колонками
-    setVacancies((prev) => {
+      // Возвращаем переставленные карточки в общий массив.
       return prev.map((vacancy) => {
-        console.log(vacancy.id, vacancy.index, target.id);
-        return vacancy.id === sourceId ? { ...prev, status: target.id } : prev;
+        if (vacancy.status !== targetStatus) {
+          return vacancy;
+        }
+
+        return reorderedColumn[nextIndex++];
       });
     });
   }
