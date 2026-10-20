@@ -129,9 +129,11 @@ function VacanciesProvider({ children }) {
   }
 
   function handleDragEnd({ canceled, operation }) {
-    if (canceled) return;
+    if (canceled || !operation) return;
 
-    const { source } = operation;
+    const { source, target } = operation;
+
+    if (!isSortable(source)) return;
 
     if (isSortable(source)) {
       console.log({
@@ -145,32 +147,44 @@ function VacanciesProvider({ children }) {
     const sourceId = Number(operation?.source?.id);
     const targetStatus = operation?.target?.id;
 
-    if (!Number.isFinite(sourceId) || !statuses.includes(targetStatus)) {
+    if (source.initialGroup === source.group && targetStatus === sourceId) {
+      if (source.initialIndex === source.index) return;
+      if (!Number.isFinite(sourceId) || !statuses.includes(targetStatus)) {
+        return;
+      }
+
+      setVacancies((prev) => {
+        const columnVacancies = prev.filter(
+          (vacancy) => vacancy.status === source.initialGroup,
+        );
+
+        const reorderedColumn = reorder(
+          columnVacancies,
+          source.initialIndex,
+          source.index,
+        );
+
+        let nextIndex = 0;
+
+        return prev.map((vacancy) => {
+          if (vacancy.status !== source.initialGroup) {
+            return vacancy;
+          }
+
+          const newVacancy = reorderedColumn[nextIndex];
+          nextIndex++;
+
+          return newVacancy;
+        });
+      });
       return;
     }
 
+    //перенос между колонками
     setVacancies((prev) => {
-      const columnVacancies = prev.filter(
-        (vacancy) => vacancy.status === source.initialGroup,
-      );
-
-      const reorderedColumn = reorder(
-        columnVacancies,
-        source.initialIndex,
-        source.index,
-      );
-
-      let nextIndex = 0;
-
       return prev.map((vacancy) => {
-        if (vacancy.status !== source.initialGroup) {
-          return vacancy;
-        }
-
-        const newVacancy = reorderedColumn[nextIndex];
-        nextIndex++;
-
-        return newVacancy;
+        console.log(vacancy.id, vacancy.index, target.id);
+        return vacancy.id === sourceId ? { ...prev, status: target.id } : prev;
       });
     });
   }
