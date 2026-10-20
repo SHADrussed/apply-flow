@@ -129,6 +129,8 @@ function VacanciesProvider({ children }) {
   }
 
   function handleDragEnd({ canceled, operation }) {
+    if (canceled) return;
+
     const { source } = operation;
 
     if (isSortable(source)) {
@@ -140,8 +142,6 @@ function VacanciesProvider({ children }) {
       });
     }
 
-    if (canceled) return;
-
     const sourceId = Number(operation?.source?.id);
     const targetStatus = operation?.target?.id;
 
@@ -150,17 +150,28 @@ function VacanciesProvider({ children }) {
     }
 
     setVacancies((prev) => {
-      const currentVacancy = prev.find((vacancy) => vacancy.id === sourceId);
-
-      if (!currentVacancy || currentVacancy.status === targetStatus) {
-        return prev;
-      }
-
-      return prev.map((vacancy) =>
-        vacancy.id === sourceId
-          ? { ...vacancy, status: targetStatus }
-          : vacancy,
+      const columnVacancies = prev.filter(
+        (vacancy) => vacancy.status === source.initialGroup,
       );
+
+      const reorderedColumn = reorder(
+        columnVacancies,
+        source.initialIndex,
+        source.index,
+      );
+
+      let nextIndex = 0;
+
+      return prev.map((vacancy) => {
+        if (vacancy.status !== source.initialGroup) {
+          return vacancy;
+        }
+
+        const newVacancy = reorderedColumn[nextIndex];
+        nextIndex++;
+
+        return newVacancy;
+      });
     });
   }
 
