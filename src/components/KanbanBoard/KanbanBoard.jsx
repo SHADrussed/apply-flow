@@ -8,7 +8,11 @@ export default function KanbanBoard() {
   const { statusesVacancies, handleDragEnd } = useContext(VacanciesContext);
 
   return (
-    <DragDropProvider onDragEnd={handleDragEnd}>
+    <DragDropProvider
+      // React owns column children; optimistic sorting reparents them outside React.
+      onDragOver={(event) => event.preventDefault()}
+      onDragEnd={handleDragEnd}
+    >
       <KanbanStyled>
         {statusesVacancies.map((column) => (
           <KanbanColumn
