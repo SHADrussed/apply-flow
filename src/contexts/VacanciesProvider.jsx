@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { VacanciesContext } from "./VacanciesContext";
 import { isSortable } from "@dnd-kit/react/sortable";
+import { sanitizeVacancies, moveVacancy } from "../utils/vacancies";
 
 const initialVacancies = [
   {
@@ -63,7 +64,7 @@ function VacanciesProvider({ children }) {
       const parsed = JSON.parse(saved);
 
       if (Array.isArray(parsed)) {
-        return parsed;
+        return sanitizeVacancies(parsed, statuses);
       }
       return initialVacancies;
     } catch (error) {
@@ -73,7 +74,11 @@ function VacanciesProvider({ children }) {
   });
 
   useEffect(() => {
-    localStorage.setItem("vacancies", JSON.stringify(vacancies));
+    try {
+      localStorage.setItem("vacancies", JSON.stringify(vacancies));
+    } catch (error) {
+      console.warn("Ошибка сохранения вакансий", error);
+    }
   }, [vacancies]);
 
   const [search, setSearch] = useState("");
@@ -129,92 +134,14 @@ function VacanciesProvider({ children }) {
   }
 
   function handleDragEnd({ canceled, operation }) {
-    // Если пользователь отменил перетаскивание
-    if (canceled || !operation) return;
+    if (canceled || !operation?.target || !isSortable(operation.source)) return;
 
-    const { source, target } = operation;
-
-    // Работаем только с сортируемыми карточками
-    if (!isSortable(source)) return;
-
-    const sourceId = Number(source.id);
-
-    if (!Number.isFinite(sourceId)) return;
-
-    setVacancies((prev) => {
-      // Находим карточку, которую перетащили
-      const draggedVacancy = prev.find((vacancy) => vacancy.id === sourceId);
-
-      if (!draggedVacancy) return prev;
-
-      // Определяем колонку, в которую перетащили карточку
-      const targetVacancy = prev.find(
-        (vacancy) => vacancy.id === Number(target?.id),
-      );
-
-      const targetStatus =
-        source.group !== source.initialGroup && statuses.includes(source.group)
-          ? source.group
-          : statuses.includes(target?.id)
-            ? target.id
-            : (targetVacancy?.status ?? source.group);
-
-      if (!statuses.includes(targetStatus)) return prev;
-
-      // СЛУЧАЙ 1. Перенос в другую колонку.
-      if (draggedVacancy.status !== targetStatus) {
-        return prev.map((vacancy) =>
-          vacancy.id === sourceId
-            ? { ...vacancy, status: targetStatus }
-            : vacancy,
-        );
-      }
-
-      // СЛУЧАЙ 2. Перестановка внутри одной колонки.
-      const fromIndex = source.initialIndex;
-      const toIndex = source.index;
-
-      if (fromIndex === toIndex) return prev;
-
-      // Получаем только карточки нужной колонки.
-      const columnVacancies = prev.filter(
-        (vacancy) => vacancy.status === targetStatus,
-      );
-
-      // Проверяем, что индексы существуют.
-      if (
-        !Number.isInteger(fromIndex) ||
-        !Number.isInteger(toIndex) ||
-        fromIndex < 0 ||
-        toIndex < 0 ||
-        fromIndex >= columnVacancies.length ||
-        toIndex >= columnVacancies.length
-      ) {
-        return prev;
-      }
-
-      // Переставляем карточки внутри колонки.
-      const reorderedColumn = reorder(columnVacancies, fromIndex, toIndex);
-
-      let nextIndex = 0;
-
-      // Возвращаем переставленные карточки в общий массив.
-      return prev.map((vacancy) => {
-        if (vacancy.status !== targetStatus) {
-          return vacancy;
-        }
-
-        return reorderedColumn[nextIndex++];
-      });
-    });
-  }
-
-  function reorder(items, fromIndex, toIndex) {
-    const columnItems = [...items];
-    const [removed] = columnItems.splice(fromIndex, 1);
-
-    columnItems.splice(toIndex, 0, removed);
-    return columnItems;
+    // Optimistic DOM sorting is prevented by KanbanBoard. Snapshot IDs, not
+    // mutable DnD instances, before React runs the state updater.
+    const sourceId = operation.source.id;
+    const targetId = operation.target.id;
+    const visibleIds = filteredVacancies.map((vacancy) => vacancy.id);
+    setVacancies((prev) => moveVacancy(prev, sourceId, targetId, visibleIds, statuses));
   }
 
   return (
@@ -230,7 +157,6 @@ function VacanciesProvider({ children }) {
         updateVacancy,
         deleteVacancy,
         handleDragEnd,
-        reorder,
       }}
     >
       {children}
