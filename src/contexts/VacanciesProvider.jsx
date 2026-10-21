@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { VacanciesContext } from "./VacanciesContext";
-import { isSortable } from "@dnd-kit/react/sortable";
 import { sanitizeVacancies, moveVacancy } from "../utils/vacancies";
 
 const initialVacancies = [
@@ -133,15 +132,10 @@ function VacanciesProvider({ children }) {
     setVacancies((prev) => prev.filter((vacancy) => vacancy.id !== numericId));
   }
 
-  function handleDragEnd({ canceled, operation }) {
-    if (canceled || !operation?.target || !isSortable(operation.source)) return;
-
-    // Optimistic DOM sorting is prevented by KanbanBoard. Snapshot IDs, not
-    // mutable DnD instances, before React runs the state updater.
-    const sourceId = operation.source.id;
-    const targetId = operation.target.id;
+  function handleDragEnd({ sourceId, status, beforeId }) {
+    // Geometry has already been resolved by the board. Store only stable IDs.
     const visibleIds = filteredVacancies.map((vacancy) => vacancy.id);
-    setVacancies((prev) => moveVacancy(prev, sourceId, targetId, visibleIds, statuses));
+    setVacancies((prev) => moveVacancy(prev, sourceId, status, beforeId, visibleIds, statuses));
   }
 
   return (

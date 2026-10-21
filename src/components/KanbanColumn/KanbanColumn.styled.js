@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import { theme } from "../../styles/theme";
 
-export const ColumnStyled = styled.div``;
+export const ColumnStyled = styled.div`
+  /* Leave a reachable drop area after the last card, even in the tallest list. */
+  padding-bottom: ${theme.spacing.md};
+`;
 
 export const ColumnTitle = styled.h2`
   margin-bottom: ${theme.spacing.md};

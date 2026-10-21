@@ -22,21 +22,18 @@ export function sanitizeVacancies(records, statuses) {
   });
 }
 
-export function moveVacancy(items, sourceId, targetId, visibleIds, statuses) {
+export function moveVacancy(items, sourceId, status, beforeId, visibleIds, statuses) {
   const source = items.find((item) => item.id === sourceId);
-  const target = items.find((item) => item.id === targetId);
-  const status = target?.status ?? (statuses.includes(targetId) ? targetId : null);
-  if (!source || !status || sourceId === targetId ||
-      !visibleIds.includes(sourceId) || (target && !visibleIds.includes(targetId))) return items;
+  if (!source || !statuses.includes(status) || !visibleIds.includes(sourceId)) return items;
 
   const column = items.filter((item) => item.status === status && visibleIds.includes(item.id));
-  const from = column.findIndex((item) => item.id === sourceId);
-  const to = target ? column.findIndex((item) => item.id === targetId) : column.length;
+  // Remove the source FIRST: insertion indices must refer to the remaining
+  // cards, otherwise moving down is off by one.
   const reordered = column.filter((item) => item.id !== sourceId);
-  // Within a column, dropping on a card takes its index. Across columns,
-  // insert before the target; dropping on column space appends.
+  const to = beforeId === null ? reordered.length : reordered.findIndex((item) => item.id === beforeId);
+  if (to < 0) return items;
   reordered.splice(to, 0, { ...source, status });
-  if (source.status === status && (from === to || from === reordered.length - 1 && !target)) return items;
+  if (source.status === status && column.every((item, index) => item.id === reordered[index].id)) return items;
 
   let index = 0;
   const next = [];

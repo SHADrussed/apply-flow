@@ -17,7 +17,7 @@ export default function VacancyCard({ vacancy, index, group }) {
     group,
   });
   return (
-    <Card ref={ref} data-dragging={isDragging} to={"/vacancies/" + vacancy.id}>
+    <Card ref={ref} data-vacancy-id={vacancy.id} data-dragging={isDragging} to={"/vacancies/" + vacancy.id}>
       <CardHeader>
         <CompanyBadge>{vacancy.company[0]}</CompanyBadge>
         <CompanyDescription>
