@@ -17,7 +17,7 @@ async function order(page, status) {
   );
 }
 
-async function drag(page, source, target, { cancel = false, outside = false } = {}) {
+async function drag(page, source, target, { cancel = false, outside = false, half = "before" } = {}) {
   const a = await source.boundingBox();
   const b = outside ? { x: 1500, y: 920, width: 10, height: 10 } : await target.boundingBox();
   await page.mouse.move(a.x + a.width / 2, a.y + a.height / 2);
@@ -25,7 +25,7 @@ async function drag(page, source, target, { cancel = false, outside = false } = 
   await page.mouse.move(a.x + a.width / 2 + 12, a.y + a.height / 2, { steps: 5 });
   await page.waitForTimeout(180);
   // Deliberately cross other populated columns: this reproduced the DOM crash.
-  await page.mouse.move(b.x + b.width / 2, b.y + b.height / 2, { steps: 30 });
+  await page.mouse.move(b.x + b.width / 2, b.y + b.height * (half === "before" ? 0.25 : 0.75), { steps: 30 });
   await page.waitForTimeout(500);
   if (cancel) await page.keyboard.press("Escape");
   await page.mouse.up();
@@ -56,7 +56,7 @@ test("empty column after crossing populated columns, persistence and return", as
 test("occupied column insertion and sorting both directions survive reload", async ({ page }) => {
   await drag(page, card(page, 2), card(page, 5));
   expect(await order(page, "Interview")).toEqual([1, 2, 5]);
-  await drag(page, card(page, 1), card(page, 5));
+  await drag(page, card(page, 1), card(page, 5), { half: "after" });
   expect(await order(page, "Interview")).toEqual([2, 5, 1]);
   await drag(page, card(page, 1), card(page, 2));
   expect(await order(page, "Interview")).toEqual([1, 2, 5]);
@@ -82,7 +82,7 @@ test("search sorts visible cards without reordering hidden cards", async ({ page
   ])), fixture);
   await page.reload();
   await page.getByPlaceholder("Search vacancies...").fill("Match");
-  await drag(page, card(page, 1), card(page, 5));
+  await drag(page, card(page, 1), card(page, 5), { half: "after" });
   expect(await order(page, "Interview")).toEqual([5, 1]);
   await page.getByPlaceholder("Search vacancies...").fill("");
   expect(await order(page, "Interview")).toEqual([5, 2, 1]);

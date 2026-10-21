@@ -10,7 +10,7 @@ import {
 export default function KanbanColumn({ title, vacancies }) {
   const { ref, isDropTarget } = useDroppable({ id: title });
   return (
-    <ColumnStyled ref={ref}>
+    <ColumnStyled ref={ref} data-kanban-column={title}>
       <ColumnTitle>
         {title} <span>{vacancies.length}</span>
       </ColumnTitle>
