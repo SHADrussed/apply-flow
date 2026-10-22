@@ -135,12 +135,15 @@ function VacanciesProvider({ children }) {
   function handleDragEnd({ sourceId, status, beforeId }) {
     // Geometry has already been resolved by the board. Store only stable IDs.
     const visibleIds = filteredVacancies.map((vacancy) => vacancy.id);
-    setVacancies((prev) => moveVacancy(prev, sourceId, status, beforeId, visibleIds, statuses));
+    setVacancies((prev) =>
+      moveVacancy(prev, sourceId, status, beforeId, visibleIds, statuses),
+    );
   }
 
   return (
     <VacanciesContext.Provider
       value={{
+        vacancies,
         filteredVacancies,
         statuses,
         statusesVacancies,
