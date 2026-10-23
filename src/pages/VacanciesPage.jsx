@@ -11,9 +11,11 @@ import {
 import { useContext } from "react";
 import KanbanBoard from "../components/KanbanBoard/KanbanBoard";
 import { VacanciesContext } from "../contexts/VacanciesContext";
+import InterviewDialog from "../components/InterviewDialog/InterviewDialog";
 
 export default function VacanciesPage() {
-  const { search, changeSearch } = useContext(VacanciesContext);
+  const { search, changeSearch, pendingInterview } =
+    useContext(VacanciesContext);
 
   return (
     <Page>
@@ -36,6 +38,7 @@ export default function VacanciesPage() {
         </AddButton>
       </Toolbar>
       <KanbanBoard />
+      {pendingInterview && <InterviewDialog />}
     </Page>
   );
 }
