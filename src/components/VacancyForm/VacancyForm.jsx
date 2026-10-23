@@ -27,8 +27,10 @@ export default function VacancyForm({
     salary: initialData.salary,
     status: initialData.status,
     date: initialData.date,
+    interviewAt: initialData.interviewAt ?? "",
   });
-  const [error, setError] = useState("");
+
+  const [fieldErrors, setFieldErrors] = useState({});
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -38,17 +40,33 @@ export default function VacancyForm({
       [name]: value,
     }));
   };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (
-      !formData.company.trim() ||
-      !formData.position.trim() ||
-      !formData.date.trim()
-    ) {
-      setError("Company, position and date are required");
+
+    const errors = {};
+
+    if (!formData.company.trim()) {
+      errors.company = "Company is required";
+    }
+
+    if (!formData.position.trim()) {
+      errors.position = "Position is required";
+    }
+
+    if (!formData.date.trim()) {
+      errors.date = "Date is required";
+    }
+
+    if (formData.status === "Interview" && !formData.interviewAt.trim()) {
+      errors.interviewAt = "Interview date and time are required";
+    }
+
+    setFieldErrors(errors);
+
+    if (Object.keys(errors).length > 0) {
       return;
     }
-    setError("");
 
     onSubmit(formData);
   };
@@ -65,20 +83,38 @@ export default function VacancyForm({
           <Field>
             <Label>Company</Label>
             <Input
+              id="company"
               placeholder="Vercel"
               name="company"
               value={formData.company}
               onChange={handleChange}
+              $isError={!!fieldErrors.company}
+              aria-invalid={Boolean(fieldErrors.company)}
+              aria-describedby={
+                fieldErrors.company ? "company-error" : undefined
+              }
             />
+            {fieldErrors.company && (
+              <ErrorText id="company-error">{fieldErrors.company}</ErrorText>
+            )}
           </Field>
           <Field>
             <Label>Position</Label>
             <Input
+              id="position"
               placeholder="Frontend Developer"
               name="position"
               value={formData.position}
               onChange={handleChange}
+              $isError={!!fieldErrors.position}
+              aria-invalid={Boolean(fieldErrors.position)}
+              aria-describedby={
+                fieldErrors.position ? "position-error" : undefined
+              }
             />
+            {fieldErrors.position && (
+              <ErrorText id="position-error">{fieldErrors.position}</ErrorText>
+            )}
           </Field>
           <Field>
             <Label>Salary</Label>
@@ -103,16 +139,41 @@ export default function VacancyForm({
               ))}
             </Select>
           </Field>
+          {/* Дата отклика — для всех вакансий */}
           <Field>
-            <Label>Date</Label>
+            <Label htmlFor="date">Application date</Label>
             <Input
+              id="date"
               type="date"
               name="date"
               value={formData.date}
               onChange={handleChange}
+              $isError={!!fieldErrors.date}
             />
+            {fieldErrors.date && (
+              <ErrorText id="date-error">{fieldErrors.date}</ErrorText>
+            )}
           </Field>
-          {error && <ErrorText>{error}</ErrorText>}
+
+          {/* Дата и время интервью — только для Interview */}
+          {formData.status === "Interview" && (
+            <Field>
+              <Label htmlFor="interviewAt">Interview date and time</Label>
+              <Input
+                id="interviewAt"
+                type="datetime-local"
+                name="interviewAt"
+                value={formData.interviewAt}
+                onChange={handleChange}
+                $isError={!!fieldErrors.interviewAt}
+              />
+              {fieldErrors.interviewAt && (
+                <ErrorText id="interviewAt-error">
+                  {fieldErrors.interviewAt}
+                </ErrorText>
+              )}
+            </Field>
+          )}
           <SubmitButton type="submit">{submitLabel}</SubmitButton>
         </Form>
       </FormCard>

@@ -15,18 +15,15 @@ export default function UpcomingInterviews() {
   const upcomingInterviews = vacancies
     .filter((vacancy) => vacancy.status === "Interview")
     .filter((vacancy) => {
-      if (!vacancy.date || !vacancy.time) return false;
+      if (!vacancy.interviewAt) return false;
 
-      const interviewDate = new Date(`${vacancy.date}T${vacancy.time}`);
+      const interviewDate = new Date(vacancy.interviewAt);
 
       return (
         !Number.isNaN(interviewDate.getTime()) && interviewDate > new Date()
       );
     })
-    .sort(
-      (a, b) =>
-        new Date(`${a.date}T${a.time}`) - new Date(`${b.date}T${b.time}`),
-    );
+    .sort((a, b) => new Date(a.interviewAt) - new Date(b.interviewAt));
 
   return (
     <UpcomingStyled>
@@ -39,8 +36,15 @@ export default function UpcomingInterviews() {
         ) : (
           upcomingInterviews.map((vacancy) => (
             <UpcomingVacancy key={vacancy.id}>
-              <VacancyText>{vacancy.date}</VacancyText>
-              <VacancyText>{vacancy.time}</VacancyText>
+              <VacancyText>
+                {new Date(vacancy.interviewAt).toLocaleDateString("ru-RU")}
+              </VacancyText>
+              <VacancyText>
+                {new Date(vacancy.interviewAt).toLocaleTimeString("ru-RU", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </VacancyText>
 
               <VacancyImportant>{vacancy.company}</VacancyImportant>
               <VacancyImportant>{vacancy.position}</VacancyImportant>

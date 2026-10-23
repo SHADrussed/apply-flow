@@ -48,7 +48,9 @@ export const Input = styled.input`
 
   color: ${theme.colors.text};
   background-color: ${theme.colors.background};
-  border: 1px solid ${theme.colors.border};
+  border: 1px solid
+    ${({ $isError }) =>
+      $isError ? theme.colors.errorMessage : theme.colors.border};
   border-radius: ${theme.radius.sm};
 
   outline: none;

@@ -72,6 +72,8 @@ function VacanciesProvider({ children }) {
     }
   });
 
+  const [pendingInterview, setPendingInterview] = useState(null);
+
   useEffect(() => {
     try {
       localStorage.setItem("vacancies", JSON.stringify(vacancies));
@@ -89,6 +91,36 @@ function VacanciesProvider({ children }) {
       vacancy.company.toLowerCase().includes(normalizedSearch) ||
       vacancy.position.toLowerCase().includes(normalizedSearch),
   );
+
+  function confirmInterview(interviewAt) {
+    if (!pendingInterview || !interviewAt) return;
+
+    const { sourceId, status, beforeId } = pendingInterview;
+    const visibleIds = filteredVacancies.map((vacancy) => vacancy.id);
+
+    setVacancies((prev) => {
+      const moved = moveVacancy(
+        prev,
+        sourceId,
+        status,
+        beforeId,
+        visibleIds,
+        statuses,
+      );
+
+      if (moved === prev) return prev;
+
+      return moved.map((vacancy) =>
+        vacancy.id === sourceId ? { ...vacancy, interviewAt } : vacancy,
+      );
+    });
+
+    setPendingInterview(null);
+  }
+
+  function cancelInterview() {
+    setPendingInterview(null);
+  }
 
   const statusesVacancies = statuses.map((status) => {
     const columnVacancies = filteredVacancies.filter(
@@ -133,8 +165,17 @@ function VacanciesProvider({ children }) {
   }
 
   function handleDragEnd({ sourceId, status, beforeId }) {
-    // Geometry has already been resolved by the board. Store only stable IDs.
+    const vacancy = vacancies.find((item) => item.id === sourceId);
+
+    if (!vacancy) return;
+
+    if (status === "Interview" && vacancy.status !== "Interview") {
+      setPendingInterview({ sourceId, status, beforeId });
+      return;
+    }
+
     const visibleIds = filteredVacancies.map((vacancy) => vacancy.id);
+
     setVacancies((prev) =>
       moveVacancy(prev, sourceId, status, beforeId, visibleIds, statuses),
     );
@@ -154,6 +195,9 @@ function VacanciesProvider({ children }) {
         updateVacancy,
         deleteVacancy,
         handleDragEnd,
+        pendingInterview,
+        confirmInterview,
+        cancelInterview,
       }}
     >
       {children}
