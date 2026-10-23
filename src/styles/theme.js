@@ -3,12 +3,15 @@ export const theme = {
     background: "#0B0D10",
     surface: "#11151A",
     surfaceHover: "#171C22",
+    surfaceSecondary: "#353535",
+    surfaceSecondaryHover: "#4e4e4e",
     border: "#232A31",
     text: "#F5F7FA",
     textMuted: "#8B96A5",
     accent: "#7C6CFF",
     accentHover: "#553eff",
     errorMessage: "#ff6b6b",
+    popUpBackground: "rgba(0, 0, 0, 0.8)",
   },
 
   radius: {

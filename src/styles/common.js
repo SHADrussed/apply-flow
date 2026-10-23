@@ -23,10 +23,25 @@ export const Button = styled.button`
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
+  padding: 8px 16px;
+  border: none;
+  background-color: ${theme.colors.accent};
+  color: ${theme.colors.text};
+  &:hover {
+    background-color: ${theme.colors.accentHover};
+  }
+`;
+
+export const ButtonSecondary = styled(Button)`
+  background-color: ${theme.colors.surfaceSecondary};
+  color: ${theme.colors.textMuted};
+  &:hover {
+    background-color: ${theme.colors.surfaceSecondaryHover};
+  }
 `;
 
 export const ErrorMessage = styled.p`
-  color: darkred;
+  color: ${theme.colors.errorMessage};
   padding-top: 12px;
   padding-bottom: 12px;
 `;
@@ -69,4 +84,15 @@ export const BackLink = styled(Link)`
     color: ${theme.colors.accentHover};
     background-color: ${theme.colors.surfaceHover};
   }
+`;
+
+export const Input = styled.input`
+  background-color: ${theme.colors.surface};
+  border-radius: ${theme.radius.md};
+  color: ${theme.colors.text};
+  padding: ${theme.spacing.sm} ${theme.spacing.md};
+
+  border: 1px solid
+    ${({ $isError }) =>
+      $isError ? theme.colors.errorMessage : theme.colors.border};
 `;
