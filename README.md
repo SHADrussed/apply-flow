@@ -1,19 +1,26 @@
-# React + Vite
+# ApplyFlow
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A learning project for tracking job applications. This repository currently contains a dashboard, a vacancy list and an interview overview built with React, Vite, React Router and styled-components.
 
-Currently, two official plugins are available:
+**Demo only:** the companies, dates, salary figures and statuses in `src/data/vacancies.js` are sample records. They do not represent real applications or interviews.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Run locally
 
-## React Compiler
+```bash
+npm ci
+npm run dev
+```
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+See `package.json` for available build and lint commands.
 
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+## Current scope
 
-## Expanding the ESLint configuration
+- Dashboard with counts calculated from the example vacancy records
+- Vacancy and interview summaries
+- Navigation between the current routes
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+This is a work in progress. Data persistence, complete CRUD workflows, and real integrations are not claimed to be implemented.
+
+## Visual approach
+
+A quiet, neutral UI with one restrained accent. Changes were made as a conservative *unslop* pass, without adding decorative effects. The review followed [Damir Sokolovsky's unslop skill](https://github.com/heydamir/unslop) (CC BY 4.0).
