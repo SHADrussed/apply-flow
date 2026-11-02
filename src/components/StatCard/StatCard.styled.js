@@ -9,19 +9,23 @@ export const StatCardStyled = styled.div`
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-  &:hover {
-    background-color: ${theme.colors.surfaceHover};
-  }
   gap: ${theme.spacing.sm};
+  min-width: 0;
 `;
+
 export const Title = styled.div`
   color: ${theme.colors.textMuted};
+  font-size: ${theme.fontSize.sm};
 `;
+
 export const Value = styled.div`
   color: ${theme.colors.text};
   font-size: ${theme.fontSize.lg};
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
 `;
-export const ChangeIndicator = styled.div`
+
+export const StatDetail = styled.div`
   color: ${theme.colors.textMuted};
-  font-size: ${theme.fontSize.sm};
+  font-size: ${theme.fontSize.xs};
 `;

@@ -1,16 +1,16 @@
 import {
-  ChangeIndicator,
   StatCardStyled,
+  StatDetail,
   Title,
   Value,
 } from "./StatCard.styled";
 
-export default function StatCard({ title, value, change }) {
+export default function StatCard({ title, value, detail }) {
   return (
     <StatCardStyled>
       <Title>{title}</Title>
       <Value>{value}</Value>
-      <ChangeIndicator>{change}</ChangeIndicator>
+      {detail && <StatDetail>{detail}</StatDetail>}
     </StatCardStyled>
   );
 }
