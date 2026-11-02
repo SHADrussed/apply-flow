@@ -1,47 +1,45 @@
 import { createGlobalStyle } from "styled-components";
+import { theme } from "./theme";
 
 export const GlobalStyles = createGlobalStyle`
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
   * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-*:before,
-*:after {
-  box-sizing: border-box;
-}
-
-a,
-a:visited {
-  text-decoration: none;
-  cursor: pointer;
-}
-
-button {
-  cursor: pointer;
-  outline: none;
-}
-
-ul li {
-  list-style: none;
-}
-
-@keyframes animation {
-  0% {
-    height: 0;
-    opacity: 0;
+    margin: 0;
+    padding: 0;
   }
-  100% {
-    height: auto;
-    opacity: 1;
+
+  html,
+  body {
+    width: 100%;
+    min-height: 100%;
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: ${theme.colors.text};
+    background: ${theme.colors.background};
   }
-}
-html,
-body {
-  width: 100%;
-  height: 100%;
-  font-family: "Roboto", Arial, Helvetica, sans-serif;
-  color: #000000;
-}
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button {
+    font: inherit;
+    cursor: pointer;
+  }
+
+  :is(a, button, input, select, textarea):focus-visible {
+    outline: 2px solid ${theme.colors.accent};
+    outline-offset: 3px;
+  }
+
+  ul {
+    list-style: none;
+  }
 `;
